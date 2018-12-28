@@ -2,22 +2,21 @@
 
 <link rel="stylesheet" type="text/css" href="<?= CSS_URL . "style.css" ?>">
 <meta charset="UTF-8" />
-<title>Article detail</title>
+<title>Podrobnosti artikla</title>
 
-<h1>Details of: <?= $title ?></h1>
+<h1>Podrobnosti o artiklu: <?= $title ?></h1>
 
 <p>[
-    <a href="<?= BASE_URL . "articles" ?>">All articles</a> |
-    <a href="<?= BASE_URL . "articles/add" ?>">Add new</a>
+    <a href="<?= BASE_URL . "articles" ?>">Vsi artikli</a> |
+    <a href="<?= BASE_URL . "articles/add" ?>">Dodaj nov artikel</a>
     ]</p>
 
 <ul>
-    <li>Author: <b><?= $author ?></b></li>
-    <li>Title: <b><?= $title ?></b></li>
-    <li>Price: <b><?= $price ?> EUR</b></li>
-    <li>Year: <b><?= $year ?></b></li>
-    <li>Description: <i><?= $description ?></i></li>
+    <li>Naziv: <b><?= $title ?></b></li>
+    <li>Cena: <b><?= $price ?> EUR</b></li>
+    <li>Aktiviran: <b><?= $activated ? "DA" : "NE" ?></b></li>
+    <li>Opis: <i><?= $description ?></i></li>
 </ul>
 
-<p>[ <a href="<?= BASE_URL . "articles/edit/" . $id ?>">Edit</a> |
-    <a href="<?= BASE_URL . "articles" ?>">Article index</a> ]</p>
+<p>[ <a href="<?= BASE_URL . "articles/edit/" . $id ?>">Urejanje artikla</a> |
+    <a href="<?= BASE_URL . "articles" ?>">Nazaj na seznam artiklov</a> ]</p>

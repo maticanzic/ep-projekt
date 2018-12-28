@@ -48,14 +48,13 @@ class ArticlesRESTController {
     }
 
     public static function delete($id) {
-        // TODO: Implementiraj delete
         try {
             ArticleDB::get(["id" => $id]);
             ArticleDB::delete(["id" => $id]);
             echo ViewHelper::renderJSON("", 200);
         } catch (Exception $ex) {
+            // Vrni kodo 404 v primeru neobstoječe knjige
             echo ViewHelper::renderJSON("No such article", 404);
             }
         }
-        // Vrni kodo 404 v primeru neobstoječe knjige
 }

@@ -16,10 +16,9 @@ class ArticlesController {
     }
 
     public static function addForm($values = [
-        "author" => "",
         "title" => "",
         "price" => "",
-        "year" => "",
+        "activated" => "",
         "description" => ""
     ]) {
         echo ViewHelper::render("view/article-add.php", $values);
@@ -50,6 +49,10 @@ class ArticlesController {
 
     public static function edit($id) {
         $data = filter_input_array(INPUT_POST, self::getRules());
+        
+        if (!isset($data["activated"]) || $data["activated"] === "") {
+            $data["activated"] = 0;
+        }
 
         if (self::checkValues($data)) {
             $data["id"] = $id;
@@ -87,7 +90,7 @@ class ArticlesController {
 
         $result = TRUE;
         foreach ($input as $value) {
-            $result = $result && $value != false;
+            $result = $result && $value !== false;
         }
 
         return $result;
@@ -100,17 +103,9 @@ class ArticlesController {
     public static function getRules() {
         return [
             'title' => FILTER_SANITIZE_SPECIAL_CHARS,
-            'author' => FILTER_SANITIZE_SPECIAL_CHARS,
             'description' => FILTER_SANITIZE_SPECIAL_CHARS,
             'price' => FILTER_VALIDATE_FLOAT,
-            'year' => [
-                'filter' => FILTER_VALIDATE_INT,
-                'options' => [
-                    'min_range' => 1800,
-                    'max_range' => date("Y")
-                ]
-            ]
+            'activated' => FILTER_VALIDATE_BOOLEAN
         ];
     }
-
 }

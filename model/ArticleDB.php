@@ -5,13 +5,13 @@ require_once 'model/AbstractDB.php';
 class ArticleDB extends AbstractDB {
 
     public static function insert(array $params) {
-        return parent::modify("INSERT INTO article (author, title, description, price, year) "
-                        . " VALUES (:author, :title, :description, :price, :year)", $params);
+        return parent::modify("INSERT INTO article (title, description, price, activated) "
+                        . " VALUES (:title, :description, :price, :activated)", $params);
     }
 
     public static function update(array $params) {
-        return parent::modify("UPDATE article SET author = :author, title = :title, "
-                        . "description = :description, price = :price, year = :year"
+        return parent::modify("UPDATE article SET title = :title, "
+                        . "description = :description, price = :price, activated = :activated"
                         . " WHERE id = :id", $params);
     }
 
@@ -20,10 +20,10 @@ class ArticleDB extends AbstractDB {
     }
 
     public static function get(array $id) {
-        $articles = parent::query("SELECT id, author, title, description, price, year"
+        $articles = parent::query("SELECT id, title, description, price, activated"
                         . " FROM article"
                         . " WHERE id = :id", $id);
-
+        
         if (count($articles) == 1) {
             return $articles[0];
         } else {
@@ -32,13 +32,13 @@ class ArticleDB extends AbstractDB {
     }
 
     public static function getAll() {
-        return parent::query("SELECT id, author, title, price, year, description"
+        return parent::query("SELECT id, title, price, activated, description"
                         . " FROM article"
                         . " ORDER BY id ASC");
     }
 
     public static function getAllwithURI(array $prefix) {
-        return parent::query("SELECT id, author, title, price, year, "
+        return parent::query("SELECT id, title, price, activated, "
                         . "          CONCAT(:prefix, id) as uri "
                         . "FROM article "
                         . "ORDER BY id ASC", $prefix);
