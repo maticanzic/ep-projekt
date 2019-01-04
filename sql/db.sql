@@ -66,16 +66,16 @@ CREATE TABLE `user` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `article`
+-- Dumping data for table `user`
 --
 
 LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `article` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES 
-(1,'Miha', 'Zahradnik', 'miha@zahradnik.si', 'mihec1', 0),
-(2, 'Nika', 'Godec', 'nika@godec.si', 'niki1', 1),
-(3, 'Maja', 'Lobnik', 'maja@lobnik.si', 'majci1', 2);
-/*!40000 ALTER TABLE `article` ENABLE KEYS */;
+(1,'Miha', 'Zahradnik', 'miha@zahradnik.si', 'mihec1', 0, '', ''),
+(2, 'Nika', 'Godec', 'nika@godec.si', 'niki1', 1, '', ''),
+(3, 'Maja', 'Lobnik', 'maja@lobnik.si', 'majci1', 2, 'Večna pot 113, 1000 Ljubljana', '040123456');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
