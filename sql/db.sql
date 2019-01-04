@@ -58,7 +58,7 @@ CREATE TABLE `user` (
   `lastName` varchar(255) COLLATE utf8_slovenian_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_slovenian_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_slovenian_ci NOT NULL,
-  `type` smallint NOT NULL,
+  `type` enum('0', '1', '2') NOT NULL,
   `address` varchar(255) COLLATE utf8_slovenian_ci,
   `phone` varchar(255) COLLATE utf8_slovenian_ci,
   PRIMARY KEY (`id`)
@@ -72,9 +72,9 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `article` DISABLE KEYS */;
 INSERT INTO `user` VALUES 
-(1,'Miha', 'Zahradnik', 'miha@zahradnik.si', 'mihec1', 0),
-(2, 'Nika', 'Godec', 'nika@godec.si', 'niki1', 1),
-(3, 'Maja', 'Lobnik', 'maja@lobnik.si', 'majci1', 2);
+(1,'Miha', 'Zahradnik', 'miha@zahradnik.si', 'mihec1', '0'),
+(2, 'Nika', 'Godec', 'nika@godec.si', 'niki1', '1'),
+(3, 'Maja', 'Lobnik', 'maja@lobnik.si', 'majci1', '2');
 /*!40000 ALTER TABLE `article` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -85,7 +85,7 @@ DROP TABLE IF EXISTS `order`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `status` smallint NOT NULL,
+  `status` enum('0', '1', '2') NOT NULL,
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
