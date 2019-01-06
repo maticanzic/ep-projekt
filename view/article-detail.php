@@ -7,8 +7,8 @@
 <h1>Podrobnosti o artiklu: <?= $title ?></h1>
 
 <p>[
-    <a href="<?= BASE_URL . "articles" ?>">Vsi artikli</a> |
-    <a href="<?= BASE_URL . "articles/add" ?>">Dodaj nov artikel</a>
+    <a href="<?= BASE_URL . "articles/add" ?>">Dodaj nov artikel</a> |
+    <a href="<?= BASE_URL . "articles" ?>">Vsi artikli</a>
     ]</p>
 
 <ul>

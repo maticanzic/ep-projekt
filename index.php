@@ -5,6 +5,7 @@ session_start();
 
 require_once("controller/ArticlesController.php");
 require_once("controller/ArticlesRESTController.php");
+require_once("controller/UsersController.php");
 
 define("BASE_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php"));
 define("IMAGES_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/images/");
@@ -13,6 +14,31 @@ define("CSS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/css/");
 $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
 $urls = [
+    "/^users$/" => function ($method) {
+        UsersController::index();
+    },
+        "/^users\/(\d+)$/" => function ($method, $id) {
+        UsersController::get($id);
+    },
+    "/^users\/add$/" => function ($method) {
+        if ($method == "POST") {
+            UsersController::add();
+        } else {
+            UsersController::addForm();
+        }
+    },
+    "/^users\/edit\/(\d+)$/" => function ($method, $id) {
+        if ($method == "POST") {
+            UsersController::edit($id);
+        } else {
+            UsersController::editForm($id);
+        }
+    },
+    "/^users\/delete\/(\d+)$/" => function ($method, $id) {
+        if ($method == "POST") {
+            UsersController::delete($id);
+        }
+    },
     "/^articles$/" => function ($method) {
         ArticlesController::index();
     },

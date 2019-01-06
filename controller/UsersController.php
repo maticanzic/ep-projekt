@@ -1,27 +1,31 @@
 <?php
 
-require_once("model/ArticleDB.php");
+require_once("model/UserDB.php");
 require_once("ViewHelper.php");
 
-class ArticlesController {
+class UsersController {
 
     public static function get($id) {
-        echo ViewHelper::render("view/article-detail.php", ArticleDB::get(["id" => $id]));
+        echo ViewHelper::render("view/user-detail.php", UserDB::get(["id" => $id]));
     }
 
     public static function index() {
-        echo ViewHelper::render("view/article-list.php", [
-            "articles" => ArticleDB::getAll()
+        echo ViewHelper::render("view/user-list.php", [
+            "users" => UserDB::getAll()
         ]);
     }
 
     public static function addForm($values = [
-        "title" => "",
-        "price" => "",
-        "activated" => 0,
-        "description" => ""
+        "name" => "",
+        "lastName" => "",
+        "email" => "",
+        "password" => "",
+        "type" => 0,
+        "address" => "",
+        "phone" => "",
+        "activated" => 0
     ]) {
-        echo ViewHelper::render("view/article-add.php", $values);
+        echo ViewHelper::render("view/user-add.php", $values);
     }
 
     public static function add() {
@@ -30,10 +34,11 @@ class ArticlesController {
         if (!isset($data["activated"]) || $data["activated"] === "" || $data["activated"] == null) {
             $data["activated"] = 0;
         }
-
+        print_r("Some data: ");
+        print_r($data);
         if (self::checkValues($data)) {
-            $id = ArticleDB::insert($data);
-            echo ViewHelper::redirect(BASE_URL . "articles/" . $id);
+            $id = UserDB::insert($data);
+            echo ViewHelper::redirect(BASE_URL . "users/" . $id);
         } else {
             self::addForm($data);
         }
@@ -43,12 +48,12 @@ class ArticlesController {
         if (is_array($params)) {
             $values = $params;
         } else if (is_numeric($params)) {
-            $values = ArticleDB::get(["id" => $params]);
+            $values = UserDB::get(["id" => $params]);
         } else {
             throw new InvalidArgumentException("Cannot show form.");
         }
 
-        echo ViewHelper::render("view/article-edit.php", $values);
+        echo ViewHelper::render("view/user-edit.php", $values);
     }
 
     public static function edit($id) {
@@ -57,11 +62,11 @@ class ArticlesController {
         if (!isset($data["activated"]) || $data["activated"] === "" || $data["activated"] == null) {
             $data["activated"] = 0;
         }
-
+        
         if (self::checkValues($data)) {
             $data["id"] = $id;
-            ArticleDB::update($data);
-            ViewHelper::redirect(BASE_URL . "articles/" . $data["id"]);
+            UserDB::update($data);
+            ViewHelper::redirect(BASE_URL . "users/" . $data["id"]);
         } else {
             self::editForm($data);
         }
@@ -73,10 +78,10 @@ class ArticlesController {
         ]);
 
         if (self::checkValues($data)) {
-            ArticleDB::delete(["id" => $id]);
-            $url = BASE_URL . "articles";
+            UserDB::delete(["id" => $id]);
+            $url = BASE_URL . "users";
         } else {
-            $url = BASE_URL . "articles/edit/" . $id;
+            $url = BASE_URL . "users/edit/" . $id;
         }
 
         ViewHelper::redirect($url);
@@ -102,14 +107,18 @@ class ArticlesController {
     }
 
     /**
-     * Returns an array of filtering rules for manipulation articles
+     * Returns an array of filtering rules for manipulation users
      * @return type
      */
     public static function getRules() {
-        return [
-            'title' => FILTER_SANITIZE_SPECIAL_CHARS,
-            'description' => FILTER_SANITIZE_SPECIAL_CHARS,
-            'price' => FILTER_VALIDATE_FLOAT,
+        return [      
+            'name' => FILTER_SANITIZE_SPECIAL_CHARS,
+            'lastName' => FILTER_SANITIZE_SPECIAL_CHARS,
+            'email' => FILTER_SANITIZE_SPECIAL_CHARS,
+            'password' => FILTER_SANITIZE_SPECIAL_CHARS,
+            'type' => FILTER_SANITIZE_NUMBER_INT,
+            'address' => FILTER_SANITIZE_SPECIAL_CHARS,
+            'phone' => FILTER_SANITIZE_SPECIAL_CHARS,
             'activated' => FILTER_VALIDATE_BOOLEAN
         ];
     }

@@ -61,6 +61,7 @@ CREATE TABLE `user` (
   `type` smallint NOT NULL,
   `address` varchar(255) COLLATE utf8_slovenian_ci,
   `phone` varchar(255) COLLATE utf8_slovenian_ci,
+  `activated` boolean NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -72,9 +73,9 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES 
-(1,'Miha', 'Zahradnik', 'miha@zahradnik.si', 'mihec1', 0, '', ''),
-(2, 'Nika', 'Godec', 'nika@godec.si', 'niki1', 1, '', ''),
-(3, 'Maja', 'Lobnik', 'maja@lobnik.si', 'majci1', 2, 'Večna pot 113, 1000 Ljubljana', '040123456');
+(1,'Miha', 'Zahradnik', 'miha@zahradnik.si', 'mihec1', 0, '', '', true),
+(2, 'Nika', 'Godec', 'nika@godec.si', 'niki1', 1, '', '', true),
+(3, 'Maja', 'Lobnik', 'maja@lobnik.si', 'majci1', 2, 'Večna pot 113, 1000 Ljubljana', '040123456', true);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

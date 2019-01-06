@@ -5,14 +5,14 @@
 class UserDB extends AbstractDB {
 
     public static function insert(array $params) {
-        return parent::modify("INSERT INTO user (name, lastName, email, password, type, address, phone) "
-                        . " VALUES (:name, :lastName, :email, :password, :type, :address, :phone)", $params);
+        return parent::modify("INSERT INTO user (name, lastName, email, password, type, address, phone, activated) "
+                        . " VALUES (:name, :lastName, :email, :password, :type, :address, :phone, :activated)", $params);
     }
 
     public static function update(array $params) {
-        return parent::modify("UPDATE article SET name = :name, "
+        return parent::modify("UPDATE user SET name = :name, "
                         . "lastName = :lastName, email = :email, password = :password, "
-                        . "type = :type, address = :address, phone = :phone"
+                        . "type = :type, address = :address, phone = :phone, activated = :activated"
                         . " WHERE id = :id", $params);
     }
 
@@ -21,7 +21,7 @@ class UserDB extends AbstractDB {
     }
 
     public static function get(array $id) {
-        $users = parent::query("SELECT id, name, lastName, email, password, type, address, phone"
+        $users = parent::query("SELECT id, name, lastName, email, password, type, address, phone, activated"
                         . " FROM user"
                         . " WHERE id = :id", $id);
         
@@ -33,13 +33,13 @@ class UserDB extends AbstractDB {
     }
 
     public static function getAll() {
-        return parent::query("SELECT id, name, lastName, email, password, type, address, phone"
+        return parent::query("SELECT id, name, lastName, email, password, type, address, phone, activated"
                         . " FROM user"
                         . " ORDER BY id ASC");
     }
 
     public static function getAllwithURI(array $prefix) {
-        return parent::query("SELECT id, name, lastName, email, "
+        return parent::query("SELECT id, name, lastName, email, activated "
                         . "          CONCAT(:prefix, id) as uri "
                         . "FROM user "
                         . "ORDER BY id ASC", $prefix);

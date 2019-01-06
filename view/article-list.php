@@ -4,11 +4,11 @@
 <meta charset="UTF-8" />
 <title>Seznam artiklov</title>
 
-<h1>Vsi artikli</h1>
+<h1>Spletna trgovina</h1>
 
 <p>[
-<a href="<?= BASE_URL . "articles" ?>">Vsi artikli</a> |
-<a href="<?= BASE_URL . "articles/add" ?>">Dodaj nov artikel</a>
+<a href="<?= BASE_URL . "articles/add" ?>">Dodaj nov artikel</a> |
+<a href="<?= BASE_URL . "users" ?>">Vsi uporabniki</a>
 ]</p>
 
 <ul>
