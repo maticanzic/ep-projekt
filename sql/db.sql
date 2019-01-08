@@ -1,5 +1,5 @@
 drop database if exists articlestore;
-create database articlestore;
+create database if not exists articlestore default character set utf8mb4 collate utf8mb4_unicode_ci;
 use articlestore;
 -- MySQL dump 10.13  Distrib 5.5.38, for debian-linux-gnu (i686)
 --
@@ -32,7 +32,7 @@ CREATE TABLE `article` (
   `price` float NOT NULL,
   `activated` boolean NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -54,16 +54,17 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_slovenian_ci NOT NULL,
-  `lastName` varchar(255) COLLATE utf8_slovenian_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8_slovenian_ci NOT NULL,
+  `lastName` varchar(100) COLLATE utf8_slovenian_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_slovenian_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_slovenian_ci NOT NULL,
-  `type` smallint NOT NULL,
+  `type` smallint NOT NULL default 2,
   `address` varchar(255) COLLATE utf8_slovenian_ci,
-  `phone` varchar(255) COLLATE utf8_slovenian_ci,
+  `phone` varchar(100) COLLATE utf8_slovenian_ci,
+  `hash` varchar(32) COLLATE NOT NULL,
   `activated` boolean NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,7 +89,7 @@ CREATE TABLE `order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` smallint NOT NULL,
   PRIMARY KEY (`id`)
-)ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
