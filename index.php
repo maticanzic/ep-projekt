@@ -6,6 +6,9 @@ session_start();
 require_once("controller/ArticlesController.php");
 require_once("controller/ArticlesRESTController.php");
 require_once("controller/UsersController.php");
+require_once("controller/ClientRegistration.php");
+require_once("controller/Login.php");
+require_once("controller/Logout.php");
 
 define("BASE_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php"));
 define("IMAGES_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/images/");
