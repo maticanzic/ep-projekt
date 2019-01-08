@@ -61,7 +61,6 @@ abstract class AbstractDB {
     protected static function modify($sql, array $params = array()) {
         $stmt = self::getConnection()->prepare($sql);
         $params_filtered = self::filterParams($sql, $params);
-        print_r($params_filtered);
         $stmt->execute($params_filtered);
         
         return self::getConnection()->lastInsertId();

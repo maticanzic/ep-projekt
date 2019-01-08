@@ -17,7 +17,6 @@
     <p><label>Geslo: <input type="password" name="password" value="<?= $password ?>" required /></label></p>
     <p><label>Tip uporabnika:
             <select name="type">
-                <option value="0">Administrator</option>
                 <option value="1">Prodajalec</option>
                 <option value="2">Stranka</option>
             </select></label></p>
