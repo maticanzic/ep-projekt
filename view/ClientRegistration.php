@@ -1,11 +1,12 @@
 <?php
 // Include config file
-//require_once "DB.php";
+require_once "model/DB.php";
  
 // Define variables and initialize with empty values
-$name = $lastName = $email = $password = $address = $phone = "";
-$name_err = $lastName_err = $email_err = $password_err = $address_err = $phone_err = "";
- 
+$name = $lastName = $email = $password = $address = $zipcode_id = $phone = "";
+$name_err = $lastName_err = $email_err = $password_err = $address_err = $zipcode_id_err = $phone_err = "";
+$mysqli = DBInit::getInstance();
+
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate name
@@ -33,7 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare a select statement
         $sql = "SELECT id FROM users WHERE email = ?";
         
-        if($stmt = $mysqli->prepare($sql)){
+        if($stmt = $mysqli->prepare("SELECT id FROM users WHERE email = ?")){
             // Bind variables to the prepared statement as parameters
             $stmt->bind_param("s", $param_email);
             
@@ -76,6 +77,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else{
         $address = trim($_POST["address"]);
     }
+    
+    // Validate zipcode_id
+    if(empty(trim($_POST["zipcode_id"]))){
+        $zipcode_id_err = "Prosimo izberite poštno številko.";     
+    } 
 
     // Validate phone
     if(empty(trim($_POST["phone"]))){
@@ -87,15 +93,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($lastName_err) && empty($email_err) && empty($password_err) && empty($address_err) && empty($phone_err)){
+    if(empty($name_err) && empty($lastName_err) && empty($email_err) && empty($password_err) && empty($address_err) && empty($zipcode_id_err) && empty($phone_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (name, lastName, email, password, address, phone) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO users (name, lastName, email, password, zipcode_id, address, phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
          
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("ssssss", $param_name, $param_lastName, $param_email,
-                                $salted_password, $param_address, $param_phone);
+            $stmt->bind_param("sssssis", $param_name, $param_lastName, $param_email,
+                                $salted_password, $param_address, $param_zipcode_id, $param_phone);
             
             // Set parameters
             $param_name = $name;
@@ -108,12 +114,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $salted_password = crypt($password, $salt);
 
             $param_address = $address;
+            $param_zipcode_id = $zipcode_id;
             $param_phone = $phone;
             
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Redirect to login page
-                header("location: Login.php");
+                //header("location: Login.php");
+                CtrlRegistration::login();
             } else{
                 echo "Nekaj je šlo narobe, poskusite znova.";
             }

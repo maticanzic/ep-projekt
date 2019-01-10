@@ -60,6 +60,7 @@ CREATE TABLE `user` (
   `password` varchar(255) COLLATE utf8_slovenian_ci NOT NULL,
   `type` smallint NOT NULL default 2,
   `address` varchar(255) COLLATE utf8_slovenian_ci,
+  `zipcode_id` int(11),
   `phone` varchar(100) COLLATE utf8_slovenian_ci,
   `activated` boolean NOT NULL,
   PRIMARY KEY (`id`)
@@ -73,9 +74,9 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES 
-(1,'Miha', 'Zahradnik', 'miha@zahradnik.si', 'mihec1', 0, '', '', '', true),
-(2, 'Nika', 'Godec', 'nika@godec.si', 'niki1', 1, '', '', '', true),
-(3, 'Maja', 'Lobnik', 'maja@lobnik.si', 'majci1', 2, 'Večna pot 113, 1000 Ljubljana', '040123456', '', true);
+(1,'Matic', 'Zahradnik', 'matic@ep.si', 'matic1', 0, '', '', '', true),
+(2, 'Vanesa', 'Godec', 'vanesa@ep.si', 'nesi1', 1, '', '', '', true),
+(3, 'Maja', 'Lobnik', 'maja@lobnik.si', 'majci1', 2, 'Večna pot 113', 5, '040123456', '', true);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -113,4 +114,30 @@ CREATE TABLE `order_article` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+
+DROP TABLE IF EXISTS `post_office`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `post_office` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `zipcode` varchar(45) COLLATE utf8_slovenian_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `post_office`
+--
+
+LOCK TABLES `post_office` WRITE;
+/*!40000 ALTER TABLE `post_office` DISABLE KEYS */;
+INSERT INTO `post_office` VALUES 
+(1, `1000 Ljubljana`),
+(2, `2000 Maribor`),
+(3, `3000 Celje`),
+(4, `4000 Kranj`),
+(5, `5000 Nova Gorica`)
+/*!40000 ALTER TABLE `post_office` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 -- Dump completed on 2014-12-12 16:45:04

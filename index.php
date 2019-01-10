@@ -3,9 +3,9 @@
 require_once("controller/ArticlesController.php");
 require_once("controller/ArticlesRESTController.php");
 require_once("controller/UsersController.php");
-require_once("controller/ClientRegistration.php");
-require_once("controller/Login.php");
-require_once("controller/Logout.php");
+require_once("controller/CtrlRegistration.php");
+//require_once("controller/Login.php");
+//require_once("controller/Logout.php");
 
 define("BASE_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php"));
 define("IMAGES_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/images/");
@@ -14,6 +14,9 @@ define("CSS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/css/");
 $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
 $urls = [
+    "/^registration$/" => function ($method) {
+        CtrlRegistration::index();
+    },
     "/^users$/" => function ($method) {
         UsersController::index();
     },
@@ -115,3 +118,27 @@ foreach ($urls as $pattern => $controller) {
 }
 
 ViewHelper::displayError(new InvalidArgumentException("No controller matched."), true);
+?>
+
+<?php
+/*    $authorized_users = ["Vanesa", "Matic"];
+
+    $client_cert = filter_input(INPUT_SERVER, "SSL_CLIENT_CERT");
+
+    if ($client_cert == null) {
+        die('err: Spremenljivka SSL_CLIENT_CERT ni nastavljena.');
+    }
+
+
+    $cert_data = openssl_x509_parse($client_cert);
+    $commonname = (is_array($cert_data['subject']['CN']) ?
+                    $cert_data['subject']['CN'][0] : $cert_data['subject']['CN']);
+    if (in_array($commonname, $authorized_users)) {
+        echo "$commonname je avtoriziran uporabnik, zato vidi trenutni čas: " . date("H:i");
+    } else {
+        echo "$commonname ni avtoriziran uporabnik in nima dostopa do ure";
+    }
+
+    echo "<p>Vsebina certifikata: ";
+    var_dump($cert_data);*/
+?>

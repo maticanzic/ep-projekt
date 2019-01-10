@@ -63,7 +63,8 @@ switch ($data["do"]) {
 
         <p>[
         <a href="<?= BASE_URL . "articles/add" ?>">Dodaj nov artikel</a> |
-        <a href="<?= BASE_URL . "users" ?>">Vsi uporabniki</a>
+        <a href="<?= BASE_URL . "users" ?>">Vsi uporabniki</a> | 
+        <a href="<?= BASE_URL . "registration" ?>">Registracija</a>
         ]</p>
 
         <div id ="main">
