@@ -132,10 +132,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             } else{
                 echo "Nekaj je šlo narobe, poskusite znova.";
             }
+            // Close statement
+            $stmt->close();
         }
-         
-        // Close statement
-        $stmt->close();
     }
     
     // Close connection
@@ -184,7 +183,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="help-block"><?php echo $address_err; ?></span>
             </div> 
             <div class="form-group <?php echo (!empty($zipcode_id_err)) ? 'has-error' : ''; ?>">
-                <select name="type">
+                <select name="zipcode_id">
                     <option value="" disabled selected>Poštna številka</option>
                     <option value="1">1000 Ljubljana</option>
                     <option value="2">2000 Maribor</option>
