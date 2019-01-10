@@ -61,7 +61,7 @@ CREATE TABLE `user` (
   `type` smallint NOT NULL default 2,
   `address` varchar(255) COLLATE utf8_slovenian_ci,
   `phone` varchar(100) COLLATE utf8_slovenian_ci,
-  `hash` varchar(32) COLLATE NOT NULL,
+  `hash` varchar(32) COLLATE utf8_slovenian_ci NOT NULL,
   `activated` boolean NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
@@ -74,9 +74,9 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES 
-(1,'Miha', 'Zahradnik', 'miha@zahradnik.si', 'mihec1', 0, '', '', true),
-(2, 'Nika', 'Godec', 'nika@godec.si', 'niki1', 1, '', '', true),
-(3, 'Maja', 'Lobnik', 'maja@lobnik.si', 'majci1', 2, 'Večna pot 113, 1000 Ljubljana', '040123456', true);
+(1,'Miha', 'Zahradnik', 'miha@zahradnik.si', 'mihec1', 0, '', '', '', true),
+(2, 'Nika', 'Godec', 'nika@godec.si', 'niki1', 1, '', '', '', true),
+(3, 'Maja', 'Lobnik', 'maja@lobnik.si', 'majci1', 2, 'Večna pot 113, 1000 Ljubljana', '040123456', '', true);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -87,9 +87,25 @@ DROP TABLE IF EXISTS `order`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
   `status` smallint NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FK_order_user` FOREIGN KEY(`id_user`) REFERENCES `user`(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+DROP TABLE IF EXISTS `order_article`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `order_article` (
+  `id_article` int(11) NOT NULL,
+  `id_order` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  PRIMARY KEY (`id_article`, `id_order`),
+  CONSTRAINT `FK_oa_order` FOREIGN KEY(`id_order`) REFERENCES `order`(`id`),
+  CONSTRAINT `FK_oa_article` FOREIGN KEY (`id_article`) REFERENCES `article`(`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

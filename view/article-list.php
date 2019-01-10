@@ -53,6 +53,7 @@ switch ($data["do"]) {
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel ="stylesheet" type="text/css" href="<?= CSS_URL . "bootstrap.min.css" ?>">
         <link rel="stylesheet" type="text/css" href="<?= CSS_URL . "style.css" ?>">
         <meta charset="UTF-8" />
         <title>Seznam artiklov</title>
@@ -67,7 +68,6 @@ switch ($data["do"]) {
 
         <div id ="main">
             <?php
-            //echo $url;
             foreach ($articles as $article): ?>
                 <div class="article">
                     <form action="<?= BASE_URL . "articles" ?>" method="post">
@@ -75,9 +75,9 @@ switch ($data["do"]) {
                         <input type="hidden" name="id" value="<?= $article["id"] ?>" />
                         <p><?= $article["title"] ?></p>
                         <b><p><?= number_format($article["price"], 2) ?> €<br/></b>
-                            <button type="submit">V košarico</button>
+                        <a href="<?= BASE_URL . "articles/" . $article["id"] ?>" class="btn btn-info details">Podrobnosti</a>
+                            <button type="submit" class="btn btn-info add-to-cart">V košarico</button>
                     </form>
-                    <!-- TO-DO: gumb za pogled podrobnosti artikla -->
                 </div>
             <?php endforeach; ?>
         </div>
@@ -103,11 +103,11 @@ switch ($data["do"]) {
                                     $article["title"] :
                                     substr($article["title"], 0, 26) . " ..."
                             ?> (<?= number_format($article["price"], 2) ?> €)
-                            <button type="submit">Posodobi</button> 
+                            <button class="update-cart" type="submit">Posodobi</button> 
                         </form>
                     <?php endforeach; ?>
 
-                    <p>Total: <b><?= number_format($znesek, 2) ?> EUR</b></p>
+                    <p>Skupaj: <b><?= number_format($znesek, 2) ?> EUR</b></p>
 
                     <form action="<?= BASE_URL . "articles" ?>" method="POST">
                         <input type="hidden" name="do" value="purge_cart" />
