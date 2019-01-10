@@ -184,13 +184,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <span class="help-block"><?php echo $address_err; ?></span>
             </div> 
             <div class="form-group <?php echo (!empty($zipcode_id_err)) ? 'has-error' : ''; ?>">
-                <select value="<?php echo $zipcode_id; ?>">
+                <select name="type">
                     <option value="" disabled selected>Poštna številka</option>
-                    <option value="hurr">1000 Ljubljana</option>
-                    <option value="hurr">2000 Maribor</option>
-                    <option value="hurr">3000 Celje</option>
-                    <option value="hurr">4000 Kranj</option>
-                    <option value="hurr">5000 Nova Gorica</option>
+                    <option value="1">1000 Ljubljana</option>
+                    <option value="2">2000 Maribor</option>
+                    <option value="3">3000 Celje</option>
+                    <option value="4">4000 Kranj</option>
+                    <option value="5">5000 Nova Gorica</option>
                 </select>
                 <span class="help-block"><?php echo $address_err; ?></span>
             </div> 
