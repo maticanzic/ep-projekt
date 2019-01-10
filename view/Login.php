@@ -9,7 +9,7 @@
 }*/
  
 // Include config file
-require_once "DB.php";
+require_once "model/DB.php";
  
 // Define variables and initialize with empty values
 $email = $password = "";

@@ -9,7 +9,8 @@
         }
         
         public static function login() {
-            echo ViewHelper::render("view/Login.php");
+            header("location:". BASE_URL . "login");
+            // echo ViewHelper::render("view/Login.php");
         }
     }
 ?>

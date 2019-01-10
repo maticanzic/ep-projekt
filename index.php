@@ -4,7 +4,7 @@ require_once("controller/ArticlesController.php");
 require_once("controller/ArticlesRESTController.php");
 require_once("controller/UsersController.php");
 require_once("controller/CtrlRegistration.php");
-//require_once("controller/Login.php");
+require_once("controller/CtrlLogin.php");
 //require_once("controller/Logout.php");
 
 define("BASE_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php"));
@@ -14,6 +14,9 @@ define("CSS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/css/");
 $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
 $urls = [
+    "/^login$/" => function ($method) {
+        CtrlLogin::index();
+    },
     "/^registration$/" => function ($method) {
         CtrlRegistration::indexReg();
     },

@@ -200,7 +200,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <label>Telefonska številka</label>
                 <input type="text" name="phone" class="form-control" value="<?= $phone ?>">
                 <span class="help-block"><?php echo $phone_err; ?></span>
-                <input type="hidden" name="type" value="2">
             </div>  
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Registriraj se">
