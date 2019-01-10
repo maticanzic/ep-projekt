@@ -1,6 +1,6 @@
 <?php
 // Initialize the session
-session_start();
+//session_start();
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
 /*if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
@@ -9,11 +9,19 @@ session_start();
 }*/
  
 // Include config file
-//require_once "DB.php";
+require_once "DB.php";
  
 // Define variables and initialize with empty values
 $email = $password = "";
 $email_err = $password_err = "";
+
+/* Attempt to connect to MySQL database */
+$mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+ 
+// Check connection
+if($mysqli === false){
+    die("ERROR: Could not connect. " . $mysqli->connect_error);
+}
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -37,9 +45,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare a select statement
         $sql = "SELECT id, email, password FROM users WHERE email = ?";
         
-        if($stmt = mysqli_prepare($link, $sql)){
+        if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_email);
+            //mysqli_stmt_bind_param($stmt, "s", $param_email);
+            $stmt->bind_param("s", $param_email);
             
             // Set parameters
             $param_email = $email;
@@ -64,7 +73,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["email"] = $email;                            
                             
                             // Redirect user to first page
-                            header("location: idex.php");
+                            //header("location: idex.php");
+                            CtrlLogin::logged_in();
                         } else{
                             // Display an error message if password is not valid
                             $password_err = "Napačno geslo!";
@@ -77,14 +87,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             } else{
                 echo "Nekaj je šlo narobe. Poskusite znova.";
             }
+            
+            // Close statement
+            $stmt->close();
         }
-        
-        // Close statement
-        mysqli_stmt_close($stmt);
     }
     
     // Close connection
-    mysqli_close($link);
+    $mysqli->close();
 }
 ?>
  
@@ -102,11 +112,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
     <div class="wrapper">
         <h2>Prijava</h2>
-        <p>Please fill in your credentials to login.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                 <label>Email</label>
-                <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+                <input type="text" name="email" class="form-control" value="<?= $email ?>">
                 <span class="help-block"><?php echo $email_err; ?></span>
             </div>    
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
