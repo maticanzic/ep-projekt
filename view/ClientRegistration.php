@@ -5,7 +5,13 @@ require_once "model/DB.php";
 // Define variables and initialize with empty values
 $name = $lastName = $email = $password = $address = $zipcode_id = $phone = "";
 $name_err = $lastName_err = $email_err = $password_err = $address_err = $zipcode_id_err = $phone_err = "";
-$mysqli = DBInit::getInstance();
+/* Attempt to connect to MySQL database */
+$mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+ 
+// Check connection
+if($mysqli === false){
+    die("ERROR: Could not connect. " . $mysqli->connect_error);
+}
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -54,10 +60,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             } else{
                 echo "Nekaj je šlo narobe, prosimo poskusite še enkrat.";
             }
+            // Close statement
+            $stmt->close();
         }
-         
-        // Close statement
-        $stmt->close();
     }
     
     // Validate password
