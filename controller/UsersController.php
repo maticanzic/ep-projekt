@@ -23,6 +23,7 @@ class UsersController {
         "type" => 0,
         "address" => "",
         "phone" => "",
+        "zipcode_id" => "",
         "activated" => 0
     ]) {
         echo ViewHelper::render("view/user-add.php", $values);
@@ -118,6 +119,7 @@ class UsersController {
             'password' => FILTER_SANITIZE_SPECIAL_CHARS,
             'type' => FILTER_SANITIZE_NUMBER_INT,
             'address' => FILTER_SANITIZE_SPECIAL_CHARS,
+            'zipcode_id' => FILTER_SANITIZE_NUMBER_INT,
             'phone' => FILTER_SANITIZE_SPECIAL_CHARS,
             'activated' => FILTER_VALIDATE_BOOLEAN
         ];

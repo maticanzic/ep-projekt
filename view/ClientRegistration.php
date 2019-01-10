@@ -38,9 +38,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $email_err = "Prosimo vnesite svoj email.";
     } else {
         // Prepare a select statement
-        $sql = "SELECT id FROM users WHERE email = ?";
+        $sql = "SELECT id FROM user WHERE email = ?";
         
-        if($stmt = $mysqli->prepare("SELECT id FROM users WHERE email = ?")){
+        if($stmt = $mysqli->prepare("SELECT id FROM user WHERE email = ?")){
             // Bind variables to the prepared statement as parameters
             $stmt->bind_param("s", $param_email);
             
@@ -103,12 +103,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($name_err) && empty($lastName_err) && empty($email_err) && empty($password_err) && empty($address_err) && empty($zipcode_id_err) && empty($phone_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (name, lastName, email, password, zipcode_id, address, phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO user (name, lastName, email, password, type, address, zipcode_id, phone, activated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
          
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("sssssis", $param_name, $param_lastName, $param_email,
-                                $salted_password, $param_address, $param_zipcode_id, $param_phone);
+            $stmt->bind_param("ssssisisi", $param_name, $param_lastName, $param_email,
+                                $salted_password, $param_type, $param_address, $param_zipcode_id, $param_phone, $param_activated);
             
             // Set parameters
             $param_name = $name;
@@ -116,13 +116,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_email = $email;
  
             // Generate a password with a known salt.
-            password_hash($password, PASSWORD_BCRYPT, array("salt" => $salt));
-            $salt = '$2y$10$' . mcrypt_create_iv(22);
-            $salted_password = crypt($password, $salt);
-
+            // password_hash($password, PASSWORD_BCRYPT, array("salt" => $salt));
+            // $salt = '$2y$10$' . mcrypt_create_iv(22);
+            $salted_password = password_hash($password, PASSWORD_DEFAULT);
+            
+            $param_type = 2;
             $param_address = $address;
             $param_zipcode_id = $zipcode_id;
             $param_phone = $phone;
+            $param_activated = 0;
+            print_r($stmt);
             
             // Attempt to execute the prepared statement
             if($stmt->execute()){
@@ -197,6 +200,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <label>Telefonska številka</label>
                 <input type="text" name="phone" class="form-control" value="<?= $phone ?>">
                 <span class="help-block"><?php echo $phone_err; ?></span>
+                <input type="hidden" name="type" value="2">
             </div>  
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Registriraj se">
