@@ -1,8 +1,15 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+require_once("ViewHelper.php");
+
+    class CtrlLogin {
+
+        public static function index() {
+            echo ViewHelper::render("view/Login.php");
+        }
+        
+        public static function logged_in() {
+            echo ViewHelper::render("view/article-list.php");
+        }
+    }
 
