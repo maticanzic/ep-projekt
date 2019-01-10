@@ -4,7 +4,7 @@
 
     class CtrlRegistration {
 
-        public static function index() {
+        public static function indexReg() {
             echo ViewHelper::render("view/ClientRegistration.php");
         }
         

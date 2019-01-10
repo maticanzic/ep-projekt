@@ -15,7 +15,7 @@ $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
 $urls = [
     "/^registration$/" => function ($method) {
-        CtrlRegistration::index();
+        CtrlRegistration::indexReg();
     },
     "/^users$/" => function ($method) {
         UsersController::index();

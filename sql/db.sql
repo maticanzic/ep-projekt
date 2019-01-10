@@ -63,7 +63,8 @@ CREATE TABLE `user` (
   `zipcode_id` int(11),
   `phone` varchar(100) COLLATE utf8_slovenian_ci,
   `activated` boolean NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FK_zipcode_id` FOREIGN KEY (`zipcode_id`) REFERENCES `post_office`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

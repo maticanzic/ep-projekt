@@ -86,7 +86,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate zipcode_id
     if(empty(trim($_POST["zipcode_id"]))){
         $zipcode_id_err = "Prosimo izberite poštno številko.";     
-    } 
+    } else{
+        $zipcode_id = trim($_POST["zipcode_id"]);
+    }
 
     // Validate phone
     if(empty(trim($_POST["phone"]))){
@@ -145,7 +147,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up</title>
+    <title>Registracija</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
         body{ font: 14px sans-serif; }
@@ -180,14 +182,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <label>Naslov</label>
                 <input type="text" name="address" class="form-control" value="<?php echo $address; ?>">
                 <span class="help-block"><?php echo $address_err; ?></span>
-            </div>  
+            </div> 
+            <div class="form-group <?php echo (!empty($zipcode_id_err)) ? 'has-error' : ''; ?>">
+                <select value="<?php echo $zipcode_id; ?>">
+                    <option value="" disabled selected>Poštna številka</option>
+                    <option value="hurr">1000 Ljubljana</option>
+                    <option value="hurr">2000 Maribor</option>
+                    <option value="hurr">3000 Celje</option>
+                    <option value="hurr">4000 Kranj</option>
+                    <option value="hurr">5000 Nova Gorica</option>
+                </select>
+                <span class="help-block"><?php echo $address_err; ?></span>
+            </div> 
             <div class="form-group <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>">
                 <label>Telefonska številka</label>
                 <input type="text" name="phone" class="form-control" value="<?php echo $phone; ?>">
                 <span class="help-block"><?php echo $phone_err; ?></span>
             </div>  
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="submit" class="btn btn-primary" value="Registriraj se">
             </div>
         </form>
     </div>    
