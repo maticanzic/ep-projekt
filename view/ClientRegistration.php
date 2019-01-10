@@ -125,7 +125,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_zipcode_id = $zipcode_id;
             $param_phone = $phone;
             $param_activated = 0;
-            print_r($stmt);
+            print_r($salted_password);
             
             // Attempt to execute the prepared statement
             if($stmt->execute()){

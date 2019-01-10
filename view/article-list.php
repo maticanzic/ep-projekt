@@ -1,4 +1,5 @@
 <?php 
+
 $url = filter_input(INPUT_SERVER, "PHP_SELF", FILTER_SANITIZE_SPECIAL_CHARS);
 $validationRules = ['do' => [
         'filter' => FILTER_VALIDATE_REGEXP,
@@ -17,6 +18,7 @@ $validationRules = ['do' => [
 ];
 
 $data = filter_input_array(INPUT_POST, $validationRules);
+
 
 switch ($data["do"]) {
     case "add_into_cart":
@@ -64,9 +66,19 @@ switch ($data["do"]) {
         <p>[
         <a href="<?= BASE_URL . "articles/add" ?>">Dodaj nov artikel</a> |
         <a href="<?= BASE_URL . "users" ?>">Vsi uporabniki</a> | 
-        <a href="<?= BASE_URL . "registration" ?>">Registracija</a>
+        <a href="<?= BASE_URL . "registration" ?>">Registracija</a> |
+        <a href="<?= BASE_URL . "login" ?>">Prijava</a>
+        
         ]</p>
-
+        
+        <?php 
+            if(isset($_SESSION["loggedin"])) {
+                echo "seja je postavljena";
+            } else {
+                echo "seja ni postavljena";
+            }
+        ?>
+        
         <div id ="main">
             <?php
             foreach ($articles as $article): ?>

@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once("controller/ArticlesController.php");
 require_once("controller/ArticlesRESTController.php");
 require_once("controller/UsersController.php");
@@ -23,7 +25,7 @@ $urls = [
     "/^users$/" => function ($method) {
         UsersController::index();
     },
-        "/^users\/(\d+)$/" => function ($method, $id) {
+    "/^users\/(\d+)$/" => function ($method, $id) {
         UsersController::get($id);
     },
     "/^users\/add$/" => function ($method) {

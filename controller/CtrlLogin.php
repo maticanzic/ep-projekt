@@ -1,6 +1,7 @@
 <?php
 
 require_once("ViewHelper.php");
+require_once 'model/ArticleDB.php';
 
     class CtrlLogin {
 
@@ -9,7 +10,8 @@ require_once("ViewHelper.php");
         }
         
         public static function logged_in() {
-            echo ViewHelper::render("view/article-list.php");
+            $articles = ArticleDB::getAll();
+            header("location:". BASE_URL . "articles");
         }
     }
 

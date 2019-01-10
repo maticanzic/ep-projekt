@@ -75,9 +75,9 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES 
-(1,'Matic', 'Zahradnik', 'matic@ep.si', 'matic1', 0, '', '', '', true),
-(2, 'Vanesa', 'Godec', 'vanesa@ep.si', 'nesi1', 1, '', '', '', true),
-(3, 'Maja', 'Lobnik', 'maja@lobnik.si', 'majci1', 2, 'Večna pot 113', 5, '040123456', true);
+(1,'Matic', 'Zahradnik', 'matic@ep.si', '$2y$10$rxQX9QnpsV4PVnx7EMwJGuE5beH/52i7lQBDfljDLm6zy6d.hCPSi', 0, '', '', '', true),
+(2, 'Vanesa', 'Godec', 'vanesa@ep.si', '$2y$10$HEV/K2FkedHZc9N.ayjkUOmzbyuLnO1yj/Q6iFddqo2IVc.4IUmOC', 1, '', '', '', true),
+(3, 'Maja', 'Lobnik', 'maja@lobnik.si', '$2y$10$LOja/YT0WBqIYYJYtgyLxeBBOl8ceZLHip/ss3clw3C/YnL/u6p.q', 2, 'Večna pot 113', 5, '040123456', true);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

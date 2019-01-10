@@ -43,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($email_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT id, email, password FROM users WHERE email = ?";
+        $sql = "SELECT id, email, password FROM user WHERE email = ?";
         
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -54,26 +54,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_email = $email;
             
             // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
+            if($stmt->execute()){
                 // Store result
-                mysqli_stmt_store_result($stmt);
+                $stmt->store_result();
                 
-                // Check if email exists, if yes then verify password
-                if(mysqli_stmt_num_rows($stmt) == 1){                    
+                // Check if username exists, if yes then verify password
+                if($stmt->num_rows == 1){                    
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password);
-                    if(mysqli_stmt_fetch($stmt)){
+                    $stmt->bind_result($id, $username, $hashed_password);
+                    if($stmt->fetch()){
                         if(password_verify($password, $hashed_password)){
-                            // Password is correct, so start a new session
-                            session_start();
                             
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["email"] = $email;                            
+                            $_SESSION["id"] = $id;                
+                            $_SESSION["name"] = $name;
+                            $_SESSION["lastName"] = $lastName;
+                            $_SESSION["email"] = $email;   
+                            $_SESSION["type"] = $type;
+                            $_SESSION["address"] = $address;
+                            $_SESSION["zipcode_id"] = $zipcode_id;                            
+                            $_SESSION["phone"] = $phone;
+                            $_SESSION["activated"] = $activated;
                             
                             // Redirect user to first page
-                            //header("location: idex.php");
+                            //header("location: idex.php");            
                             CtrlLogin::logged_in();
                         } else{
                             // Display an error message if password is not valid
@@ -86,13 +91,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 }
             } else{
                 echo "Nekaj je šlo narobe. Poskusite znova.";
-            }
-            
+            }           
             // Close statement
             $stmt->close();
         }
-    }
-    
+    }   
     // Close connection
     $mysqli->close();
 }
