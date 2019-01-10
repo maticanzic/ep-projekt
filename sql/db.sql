@@ -61,7 +61,6 @@ CREATE TABLE `user` (
   `type` smallint NOT NULL default 2,
   `address` varchar(255) COLLATE utf8_slovenian_ci,
   `phone` varchar(100) COLLATE utf8_slovenian_ci,
-  `hash` varchar(32) COLLATE utf8_slovenian_ci NOT NULL,
   `activated` boolean NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;

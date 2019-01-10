@@ -1,8 +1,5 @@
 <?php
 
-// enables sessions for the entire app
-session_start();
-
 require_once("controller/ArticlesController.php");
 require_once("controller/ArticlesRESTController.php");
 require_once("controller/UsersController.php");
