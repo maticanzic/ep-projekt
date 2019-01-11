@@ -83,19 +83,34 @@ UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 
-DROP TABLE IF EXISTS `order`;
+DROP TABLE IF EXISTS `bill`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `order` (
+CREATE TABLE `bill` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
-  `id_seller` int(11) NOT NULL,   
+  `id_seller` int(11),   
   `status` smallint NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_order_user` FOREIGN KEY(`id_user`) REFERENCES `user`(`id`),
   CONSTRAINT `FK_order_seller` FOREIGN KEY(`id_seller`) REFERENCES `user`(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bill`
+--
+
+LOCK TABLES `bill` WRITE;
+/*!40000 ALTER TABLE `bill` DISABLE KEYS */;
+INSERT INTO `bill` VALUES 
+(1, 3, '', 0),
+(2, 3, '', 1),
+(3, 3, '', 2);
+/*!40000 ALTER TABLE `bill` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
 
 DROP TABLE IF EXISTS `order_article`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -105,10 +120,10 @@ CREATE TABLE `order_article` (
   `id_order` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
   PRIMARY KEY (`id_article`, `id_order`),
-  CONSTRAINT `FK_oa_order` FOREIGN KEY(`id_order`) REFERENCES `order`(`id`) 
+  CONSTRAINT `FK_oa_order` FOREIGN KEY(`id_order`) REFERENCES `bill`(`id`) 
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `FK_oa_article` FOREIGN KEY (`id_article`) REFERENCES `article`(`id`)
+  CONSTRAINT `FK_oa_article` FOREIGN KEY (`id_article`) REFERENCES `bill`(`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
