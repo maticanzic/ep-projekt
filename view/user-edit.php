@@ -16,13 +16,21 @@
     <p><label>Ime: <input type="text" name="name" value="<?= $name ?>" autofocus required /></label></p>
     <p><label>Priimek: <input type="text" name="lastName" value="<?= $lastName ?>" required /></label></p>
     <p><label>E-naslov: <input type="text" name="email" value="<?= $email ?>" required /></label></p>
-    <p><label>Geslo: <input type="password" name="password" value="<?= password_hash($password, PASSWORD_DEFAULT) ?>" required /></label></p>
+    <p><label>Geslo: <input type="password" name="password" value="<?= $password ?>" required /></label></p>
     <p><label>Tip uporabnika:
         <select name="type">
             <option value="1">Prodajalec</option>
             <option value="2">Stranka</option>
         </select></label></p>
     <p><label>Naslov: <input type="text" name="address" value="<?= $address ?>"  /></label></p>
+    <p><label>Poštna številka:
+    <select name="zipcode_id" value="<?= $zipcode_id ?>">
+        <option value="1">1000 Ljubljana</option>
+        <option value="2">2000 Maribor</option>
+        <option value="3">3000 Celje</option>
+        <option value="4">4000 Kranj</option>
+        <option value="5">5000 Nova Gorica</option>
+    </select></label></p>
     <p><label>Telefon: <input type="text" name="phone" value="<?= $phone ?>" /></label></p>
     <p><label>Aktiviran: <input type="checkbox" name="activated" <?php if(isset($activated) && $activated == 1){print " checked=\"checked\"";} ?> /></label></p>
     <p><button>Posodobi zapis uporabnika</button></p>
