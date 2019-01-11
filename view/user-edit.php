@@ -16,7 +16,7 @@
     <p><label>Ime: <input type="text" name="name" value="<?= $name ?>" autofocus required /></label></p>
     <p><label>Priimek: <input type="text" name="lastName" value="<?= $lastName ?>" required /></label></p>
     <p><label>E-naslov: <input type="text" name="email" value="<?= $email ?>" required /></label></p>
-    <p><label>Geslo: <input type="password" name="password" value="<?= password_hash($password, PASSWORD_DEFAULT) ?>" required /></label></p>
+    <p><label>Geslo: <input type="password" name="password" value="<?= $password ?>" required /></label></p>
     <p><label>Tip uporabnika:
         <select name="type">
             <?php if($_SESSION["type"] == 0) { ?>
@@ -25,6 +25,7 @@
                 <option value="2" choose selected>Stranka</option>
             <?php } ?>
         </select></label></p>
+        
     <?php if($_SESSION["type"] == 1) { ?>
         <p><label>Naslov: <input type="text" name="address" value="<?= $address ?>"  /></label></p>
         <p><label>Poštna številka: 
@@ -37,6 +38,7 @@
             </select></label></p>
         <p><label>Telefon: <input type="text" name="phone" value="<?= $phone ?>" /></label></p>
     <?php } ?>
+
     <p><label>Aktiviran: <input type="checkbox" name="activated" <?php if(isset($activated) && $activated == 1){print " checked=\"checked\"";} ?> /></label></p>
     <p><button>Posodobi zapis uporabnika</button></p>
 </form>

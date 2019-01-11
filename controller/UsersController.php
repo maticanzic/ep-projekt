@@ -60,6 +60,10 @@ class UsersController {
     public static function edit($id) {
         $data = filter_input_array(INPUT_POST, self::getRules());
         
+        if (isset($data["password"])) {
+            $data["password"] = password_hash($data["password"], PASSWORD_DEFAULT);
+        }
+        
         if (!isset($data["activated"]) || $data["activated"] === "" || $data["activated"] == null) {
             $data["activated"] = 0;
         }
@@ -87,6 +91,10 @@ class UsersController {
 
     public static function editProfile($id) {
         $data = filter_input_array(INPUT_POST, self::getRules());
+        
+        if (isset($data["password"])) {
+            $data["password"] = password_hash($data["password"], PASSWORD_DEFAULT);
+        }
         
         if (!isset($data["activated"]) || $data["activated"] === "" || $data["activated"] == null) {
             $data["activated"] = 0;
