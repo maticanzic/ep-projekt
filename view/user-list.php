@@ -13,7 +13,9 @@
 
 <p>[
 <?php if(isset($_SESSION["loggedin"]) && $_SESSION["type"] == 0) { ?>
-    <a href="<?= BASE_URL . "users/add" ?>">Dodaj novega prodajalca</a>
+    <a href="<?= BASE_URL . "users/add" ?>">Dodaj novega prodajalca</a> |
+    <a href="<?= BASE_URL . "profile/" . $_SESSION["id"] ?>">Uredi profil</a> | 
+    <a href="<?= BASE_URL . "logout" ?>">Odjava</a>
 <?php } else if (isset($_SESSION["loggedin"]) && $_SESSION["type"] == 1) { ?>
     <a href="<?= BASE_URL . "users/add" ?>">Dodaj novo stranko</a>  |
     <a href="<?= BASE_URL . "articles" ?>">Seznam artiklov</a> 

@@ -39,8 +39,8 @@ class UsersController {
         if (!isset($data["activated"]) || $data["activated"] === "" || $data["activated"] == null) {
             $data["activated"] = 0;
         }
-        print_r("Some data: ");
-        print_r($data);
+        //print_r("Some data: ");
+        //print_r($data);
         if (self::checkValues($data)) {
             $id = UserDB::insert($data);
             echo ViewHelper::redirect(BASE_URL . "users/" . $id);
@@ -75,7 +75,11 @@ class UsersController {
         if (self::checkValues($data)) {
             $data["id"] = $id;
             UserDB::update($data);
-            ViewHelper::redirect(BASE_URL . "users/" . $data["id"]);
+            if($_SESSION["type"] == 0 || $_SESSION["type"] == 1) {
+                ViewHelper::redirect(BASE_URL . "users/" . $data["id"]);
+            } else {
+                ViewHelper::redirect(BASE_URL . "profile/" . $data["id"]);
+            }
         } else {
             self::editForm($data);
         }
@@ -107,7 +111,11 @@ class UsersController {
         if (self::checkValues($data)) {
             $data["id"] = $id;
             UserDB::update($data);
-            ViewHelper::redirect(BASE_URL . "users/" . $data["id"]);
+            if($_SESSION["type"] == 0 || $_SESSION["type"] == 1) {
+                ViewHelper::redirect(BASE_URL . "users/" . $data["id"]);
+            } else {
+                ViewHelper::redirect(BASE_URL . "profile/" . $data["id"]);
+            }
         } else {
             self::editProfileForm($data);
         }
@@ -138,7 +146,7 @@ class UsersController {
             return FALSE;
         }
 
-        print_r($input);
+        //print_r($input);
         $result = TRUE;
         foreach ($input as $value) {
             $result = $result && $value !== false;
