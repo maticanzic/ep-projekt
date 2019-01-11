@@ -20,7 +20,7 @@
     <p><button>Posodobi zapis artikla</button></p>
 </form>
 
-<form action="<?= BASE_URL . "articles/delete/" . $id ?>" method="post">
+<!--<form action="<?//= BASE_URL . "articles/delete/" . $id ?>" method="post">
     <label>Izbris artikla? <input type="checkbox" name="delete_confirmation" required /></label>
     <button type="submit" class="important">Izbriši artikel</button>
-</form>
+</form>-->
