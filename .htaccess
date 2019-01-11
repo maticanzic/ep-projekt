@@ -1,13 +1,14 @@
 RewriteEngine On
 RewriteBase /netbeans/ep-projekt/
-#RewriteCond %{HTTPS} off
-#RewriteRule "(^users/.*)" "https://%{HTTP_HOST}%{REQUEST_URI}"
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*) index.php/$1 [L,PT,QSA]
 
+#RewriteCond %{HTTPS} off
+#RewriteRule "(users.*)" "https://%{HTTP_HOST}%{REQUEST_URI}"
+#RewriteRule "(registration)" "https://%{HTTP_HOST}%{REQUEST_URI}"
 
-
-SSLVerifyClient require
-SSLVerifyDepth 1
-SSLOptions +ExportCertData
+#RewriteRule "(login)" "https://%{HTTP_HOST}%{REQUEST_URI}"
+    #SSLVerifyClient require
+    #SSLVerifyDepth 1
+    #SSLOptions +ExportCertData

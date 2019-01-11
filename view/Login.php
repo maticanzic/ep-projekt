@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $stmt->bind_result($id, $username, $hashed_password);
                     if($stmt->fetch()){
                         if(password_verify($password, $hashed_password)){
-                            session_regenerate_id();
+                            //session_regenerate_id();
                             
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
@@ -78,8 +78,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["phone"] = $phone;
                             $_SESSION["activated"] = $activated;
                             
-                            // Redirect user to first page
-                            //header("location: idex.php");            
+                            // Redirect page         
                             CtrlLogin::logged_in();
                         } else{
                             // Display an error message if password is not valid
