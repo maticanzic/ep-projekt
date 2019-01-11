@@ -66,9 +66,12 @@ switch ($data["do"]) {
         <p>[
         <a href="<?= BASE_URL . "articles/add" ?>">Dodaj nov artikel</a> |
         <a href="<?= BASE_URL . "users" ?>">Vsi uporabniki</a> | 
-        <a href="<?= BASE_URL . "registration" ?>">Registracija</a> |
-        <a href="<?= BASE_URL . "login" ?>">Prijava</a>
-        
+        <?php if(!isset($_SESSION["loggedin"])) { ?>
+            <a href="<?= BASE_URL . "registration" ?>">Registracija</a> |
+            <a href="<?= BASE_URL . "login" ?>">Prijava</a>
+        <?php } else { ?>
+            <a href="<?= BASE_URL . "login" ?>">Odjava</a>
+        <?php } ?>   
         ]</p>
         
         <?php 
