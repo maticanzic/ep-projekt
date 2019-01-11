@@ -43,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($email_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT id, email, password FROM user WHERE email = ?";
+        $sql = "SELECT id, name, lastName, email, password, type, address, zipcode_id, phone, activated FROM user WHERE email = ?";
         
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
@@ -61,10 +61,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if($stmt->num_rows == 1){                    
                     // Bind result variables
-                    $stmt->bind_result($id, $username, $hashed_password);
+                    $stmt->bind_result($id, $name, $lastName, $email, $hashed_password, $type, $address, $zipcode_id, $phone, $activated);
                     if($stmt->fetch()){
                         if(password_verify($password, $hashed_password)){
-                            session_regenerate_id();
+                            //session_regenerate_id();
                             
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
@@ -77,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["zipcode_id"] = $zipcode_id;                            
                             $_SESSION["phone"] = $phone;
                             $_SESSION["activated"] = $activated;
-                            
+                                                      
                             // Redirect user to first page
                             //header("location: idex.php");            
                             CtrlLogin::logged_in();

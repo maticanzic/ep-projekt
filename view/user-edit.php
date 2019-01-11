@@ -16,7 +16,7 @@
     <p><label>Ime: <input type="text" name="name" value="<?= $name ?>" autofocus required /></label></p>
     <p><label>Priimek: <input type="text" name="lastName" value="<?= $lastName ?>" required /></label></p>
     <p><label>E-naslov: <input type="text" name="email" value="<?= $email ?>" required /></label></p>
-    <p><label>Geslo: <input type="password" name="password" value="<?= $password ?>" required /></label></p>
+    <p><label>Geslo: <input type="password" name="password" value="<?= password_hash($password, PASSWORD_DEFAULT) ?>" required /></label></p>
     <p><label>Tip uporabnika:
         <select name="type">
             <option value="1">Prodajalec</option>
