@@ -72,6 +72,34 @@ class UsersController {
             self::editForm($data);
         }
     }
+    
+    public static function editProfileForm($params) {
+        if (is_array($params)) {
+            $values = $params;
+        } else if (is_numeric($params)) {
+            $values = UserDB::get(["id" => $params]);
+        } else {
+            throw new InvalidArgumentException("Cannot show form.");
+        }
+
+        echo ViewHelper::render("view/profile-edit.php", $values);
+    }
+
+    public static function editProfile($id) {
+        $data = filter_input_array(INPUT_POST, self::getRules());
+        
+        if (!isset($data["activated"]) || $data["activated"] === "" || $data["activated"] == null) {
+            $data["activated"] = 0;
+        }
+        
+        if (self::checkValues($data)) {
+            $data["id"] = $id;
+            UserDB::update($data);
+            ViewHelper::redirect(BASE_URL . "users/" . $data["id"]);
+        } else {
+            self::editProfileForm($data);
+        }
+    }
 
     public static function delete($id) {
         $data = filter_input_array(INPUT_POST, [

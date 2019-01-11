@@ -10,7 +10,6 @@ require_once 'model/ArticleDB.php';
         }
         
         public static function logged_in() {
-            $articles = ArticleDB::getAll();
             header("location:". BASE_URL . "articles");
         }
     }

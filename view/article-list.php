@@ -63,24 +63,17 @@ switch ($data["do"]) {
     <body>
         <h1>Spletna trgovina</h1>
 
-        <p>[
-        <a href="<?= BASE_URL . "articles/add" ?>">Dodaj nov artikel</a> |
-        <a href="<?= BASE_URL . "users" ?>">Vsi uporabniki</a> | 
+        <p>[       
         <?php if(!isset($_SESSION["loggedin"])) { ?>
             <a href="<?= BASE_URL . "registration" ?>">Registracija</a> |
-            <a href="<?= BASE_URL . "login" ?>">Prijava</a>
+            <a href="<?= BASE_URL . "login" ?>">Prijava</a> 
         <?php } else { ?>
-            <a href="<?= BASE_URL . "login" ?>">Odjava</a>
+            <a href="<?= BASE_URL . "articles/add" ?>">Dodaj nov artikel</a> |
+            <a href="<?= BASE_URL . "users" ?>">Vsi uporabniki</a> | 
+            <a href="<?= BASE_URL . "profile/" . $_SESSION["id"] ?>">Uredi profil</a> | 
+            <a href="<?= BASE_URL . "logout" ?>">Odjava</a>
         <?php } ?>   
         ]</p>
-        
-        <?php 
-            if(isset($_SESSION["loggedin"])) {
-                echo "seja je postavljena";
-            } else {
-                echo "seja ni postavljena";
-            }
-        ?>
         
         <div id ="main">
             <?php
@@ -92,18 +85,21 @@ switch ($data["do"]) {
                         <p><?= $article["title"] ?></p>
                         <b><p><?= number_format($article["price"], 2) ?> €<br/></b>
                         <a href="<?= BASE_URL . "articles/" . $article["id"] ?>" class="btn btn-info details">Podrobnosti</a>
+                        <?php if(isset($_SESSION["loggedin"]) && $_SESSION["type"] == 2) { ?>
                             <button type="submit" class="btn btn-info add-to-cart">V košarico</button>
+                        <?php } ?>
                     </form>
                 </div>
             <?php endforeach; ?>
         </div>
-        <div class="cart">
+        <?php if(isset($_SESSION["loggedin"]) && $_SESSION["type"] == 2) { ?>
+            <div class="cart">
                 <h3>Košarica</h3>
 
                 <?php
                 $kosara = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
 
-                if ($kosara):
+                if ($kosara) {
                     $znesek = 0;
                     foreach ($kosara as $id => $kolicina):
                         $article = ArticleDB::get(array("id" => $id));
@@ -129,12 +125,14 @@ switch ($data["do"]) {
                         <input type="hidden" name="do" value="purge_cart" />
                         <input type="submit" value="Izprazni košarico" />
                     </form>
-                    
+
                     <!-- TO-DO: DODAJ GUMB ZA POTRDITEV NAROČILA -->
-                    
-                <?php else: ?>
+                <?php } elseif(!isset($_SESSION["loggedin"])) { ?>
+                    Za dodajanje v košarico se je potrebno prijaviti.
+                <?php } else { ?>
                     Košara je prazna.                
-                <?php endif; ?>
+                <?php } ?>
             </div>
+        <?php } ?>
     </body>
 </html>

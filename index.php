@@ -7,15 +7,29 @@ require_once("controller/ArticlesRESTController.php");
 require_once("controller/UsersController.php");
 require_once("controller/CtrlRegistration.php");
 require_once("controller/CtrlLogin.php");
-//require_once("controller/Logout.php");
+require_once("controller/CtrlLogout.php");
 
 define("BASE_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php"));
+//echo($_SERVER["SCRIPT_NAME"]);
+//printf("\n");
+//echo(rtrim($_SERVER["SCRIPT_NAME"]));
+
 define("IMAGES_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/images/");
 define("CSS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/css/");
 
 $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
 $urls = [
+    "/^profile\/(\d+)$/" => function ($method, $id) {
+        if ($method == "POST") {
+            UsersController::editProfile($id);
+        } else {
+            UsersController::editProfileForm($id);
+        }
+    },
+    "/^logout$/" => function ($method) {
+        CtrlLogout::logout();
+    },
     "/^login$/" => function ($method) {
         CtrlLogin::index();
     },

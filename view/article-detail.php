@@ -7,7 +7,6 @@
 <h1>Podrobnosti o artiklu: <?= $title ?></h1>
 
 <p>[
-    <a href="<?= BASE_URL . "articles/add" ?>">Dodaj nov artikel</a> |
     <a href="<?= BASE_URL . "articles" ?>">Vsi artikli</a>
     ]</p>
 
@@ -18,5 +17,4 @@
     <li>Opis: <i><?= $description ?></i></li>
 </ul>
 
-<p>[ <a href="<?= BASE_URL . "articles/edit/" . $id ?>">Urejanje artikla</a> |
-    <a href="<?= BASE_URL . "articles" ?>">Nazaj na seznam artiklov</a> ]</p>
+<p>[ <a href="<?= BASE_URL . "articles/edit/" . $id ?>">Urejanje artikla</a> ] </p>

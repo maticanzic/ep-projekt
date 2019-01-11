@@ -15,8 +15,11 @@
     <li>Ime in priimek: <b><?= $name ?> <?= $lastName ?></b></li>
     <li>E-naslov: <b><?= $email ?></b></li>
     <li>Tip uporabnika: <b><?= $type ?></b></li>
-    <li>Naslov: <b><?= $address ?></b></li>
-    <li>Telefon: <b><?= $phone ?></b></li>
+    <?php if(isset($_SESSION["loggedin"]) && $_SESSION["type"] == 2) { ?>
+        <li>Naslov: <b><?= $address ?></b></li>
+        <li>Poštna številka: <b><?= $zipcode_id ?></b></li>
+        <li>Telefon: <b><?= $phone ?></b></li>
+    <?php } ?>
     <li>Aktiviran: <b><?= $activated ? "DA" : "NE" ?></b></li>
 </ul>
 

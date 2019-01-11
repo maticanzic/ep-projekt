@@ -64,6 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $stmt->bind_result($id, $username, $hashed_password);
                     if($stmt->fetch()){
                         if(password_verify($password, $hashed_password)){
+                            session_regenerate_id();
                             
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
