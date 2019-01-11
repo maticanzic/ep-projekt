@@ -8,6 +8,7 @@ require_once("controller/UsersController.php");
 require_once("controller/CtrlRegistration.php");
 require_once("controller/CtrlLogin.php");
 require_once("controller/CtrlLogout.php");
+require_once("controller/OrdersController.php");
 
 define("BASE_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php"));
 //echo($_SERVER["SCRIPT_NAME"]);
@@ -20,6 +21,12 @@ define("CSS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/css/");
 $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
 $urls = [
+    "/^orders$/" => function ($method) {
+        OrdersController::index();
+    },
+    "/^orders\/(\d+)$/" => function ($method, $id) {
+        OrdersController::get($id);
+    },
     "/^profile\/(\d+)$/" => function ($method, $id) {
         if ($method == "POST") {
             UsersController::editProfile($id);

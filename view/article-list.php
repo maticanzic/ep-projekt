@@ -71,8 +71,11 @@ switch ($data["do"]) {
             if($_SESSION["type"] == 1) { ?>
                 <a href="<?= BASE_URL . "articles/add" ?>">Dodaj nov artikel</a> |
                 <a href="<?= BASE_URL . "users" ?>">Vsi uporabniki</a> |
+                <a href="<?= BASE_URL . "orders" ?>">Vsa naročila</a> |
             <?php } else if ($_SESSION["type"] == 0) { ?>
                 <a href="<?= BASE_URL . "users" ?>">Vsi uporabniki</a> | 
+        <?php } else if ($_SESSION["type"] == 2 ){ ?>
+                <a href="<?= BASE_URL . "orders" ?>">Vsa naročila</a> |
         <?php } ?>
             <a href="<?= BASE_URL . "profile/" . $_SESSION["id"] ?>">Uredi profil</a> | 
             <a href="<?= BASE_URL . "logout" ?>">Odjava</a>
