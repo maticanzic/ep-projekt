@@ -89,9 +89,11 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
+  `id_seller` int(11) NOT NULL,   
   `status` smallint NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `FK_order_user` FOREIGN KEY(`id_user`) REFERENCES `user`(`id`)
+  CONSTRAINT `FK_order_user` FOREIGN KEY(`id_user`) REFERENCES `user`(`id`),
+  CONSTRAINT `FK_order_seller` FOREIGN KEY(`id_seller`) REFERENCES `user`(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -103,8 +105,12 @@ CREATE TABLE `order_article` (
   `id_order` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
   PRIMARY KEY (`id_article`, `id_order`),
-  CONSTRAINT `FK_oa_order` FOREIGN KEY(`id_order`) REFERENCES `order`(`id`),
+  CONSTRAINT `FK_oa_order` FOREIGN KEY(`id_order`) REFERENCES `order`(`id`) 
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `FK_oa_article` FOREIGN KEY (`id_article`) REFERENCES `article`(`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
 DROP TABLE IF EXISTS `post_office`;

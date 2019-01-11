@@ -170,12 +170,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>  
             <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                 <label>Email</label>
-                <input type="text" name="email" class="form-control" value="<?= $email ?>">
+                <input type="text" name="email" class="form-control" value="<?= $email ?>" autocomplete="off">
                 <span class="help-block"><?php echo $email_err; ?></span>
             </div>    
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Geslo</label>
-                <input type="password" name="password" class="form-control" value="<?= $password ?>">
+                <input type="password" name="password" class="form-control" value="<?= $password ?>"cautocomplete="off">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($address_err)) ? 'has-error' : ''; ?>">

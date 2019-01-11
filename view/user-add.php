@@ -34,6 +34,11 @@
             <option value="5">5000 Nova Gorica</option>
         </select></label></p>
         <p><label>Telefon: <input type="text" name="phone" value="<?= $phone ?>" /></label></p>
+    <?php } else { ?>   
+        <input type="hidden" name="address" value="<?= $address ?>" />
+        <input type="hidden" name="zipcode_id" value="<?= $zipcode_id ?>" />
+        <input type="hidden" name="phone" value="<?= $phone ?>" />
+        
     <?php } ?>
     <input type="hidden" name="activated" value=0>
     <p><label>Aktiviran: <input type="checkbox" name="activated" /></label></p>

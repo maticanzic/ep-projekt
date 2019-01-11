@@ -10,7 +10,11 @@ require_once 'model/ArticleDB.php';
         }
         
         public static function logged_in() {
-            header("location:". BASE_URL . "articles");
+            if($_SESSION["type"] == 0) {
+                header("location:". BASE_URL . "users");
+            } else {
+                header("location:". BASE_URL . "articles");
+            }
         }
     }
 

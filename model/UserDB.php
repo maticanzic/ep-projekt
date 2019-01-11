@@ -44,6 +44,5 @@ class UserDB extends AbstractDB {
                         . "FROM user "
                         . "ORDER BY id ASC", $prefix);
     }
-
 }
 

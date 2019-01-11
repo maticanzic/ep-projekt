@@ -77,6 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["zipcode_id"] = $zipcode_id;                            
                             $_SESSION["phone"] = $phone;
                             $_SESSION["activated"] = $activated;
+                            
                             CtrlLogin::logged_in();
                         } else{
                             // Display an error message if password is not valid
@@ -116,12 +117,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                 <label>Email</label>
-                <input type="text" name="email" class="form-control" value="<?= $email ?>">
+                <input type="text" name="email" class="form-control" value="<?= $email ?>" autocomplete="off">
                 <span class="help-block"><?php echo $email_err; ?></span>
             </div>    
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Geslo</label>
-                <input type="password" name="password" class="form-control">
+                <input type="password" name="password" class="form-control" autocomplete="off">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
