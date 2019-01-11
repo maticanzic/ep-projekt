@@ -67,9 +67,13 @@ switch ($data["do"]) {
         <?php if(!isset($_SESSION["loggedin"])) { ?>
             <a href="<?= BASE_URL . "registration" ?>">Registracija</a> |
             <a href="<?= BASE_URL . "login" ?>">Prijava</a> 
-        <?php } else { ?>
-            <a href="<?= BASE_URL . "articles/add" ?>">Dodaj nov artikel</a> |
-            <a href="<?= BASE_URL . "users" ?>">Vsi uporabniki</a> | 
+        <?php } else { 
+            if($_SESSION["type"] == 1) { ?>
+                <a href="<?= BASE_URL . "articles/add" ?>">Dodaj nov artikel</a> |
+                <a href="<?= BASE_URL . "users" ?>">Vsi uporabniki</a> |
+            <?php } else if ($_SESSION["type"] == 0) { ?>
+                <a href="<?= BASE_URL . "users" ?>">Vsi uporabniki</a> | 
+        <?php } ?>
             <a href="<?= BASE_URL . "profile/" . $_SESSION["id"] ?>">Uredi profil</a> | 
             <a href="<?= BASE_URL . "logout" ?>">Odjava</a>
         <?php } ?>   
