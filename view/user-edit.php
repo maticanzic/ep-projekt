@@ -38,7 +38,7 @@
         <p><label>Telefon: <input type="text" name="phone" value="<?= $phone ?>" /></label></p>
     <?php } ?>
     <p><label>Aktiviran: <input type="checkbox" name="activated" <?php if(isset($activated) && $activated == 1){print " checked=\"checked\"";} ?> /></label></p>
-    <p><button>Posodobi zapis artikla</button></p>
+    <p><button>Posodobi zapis uporabnika</button></p>
 </form>
 
 <!--<form action="<? //=BASE_URL . "users/delete/" . $id ?>" method="post">
