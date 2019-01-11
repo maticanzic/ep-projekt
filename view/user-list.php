@@ -3,12 +3,10 @@
 <link rel="stylesheet" type="text/css" href="<?= CSS_URL . "style.css" ?>">
 <meta charset="UTF-8" />
 
-<?php if(isset($_SESSION["loggedin"]) && $_SESSION["type"] == 0) { print_r($_SESSION["type"]); ?>
+<?php if(isset($_SESSION["loggedin"]) && $_SESSION["type"] == 0) { ?>
     <title>Seznam prodajalcev</title>
     <h1>Vsi prodajalci</h1>
-<?php } else if($_SESSION["type"] == 1) { 
-     
-    ?>
+<?php } else if($_SESSION["type"] == 1) { ?>
     <title>Seznam strank</title>
     <h1>Vse stranke</h1>
 <?php } ?>
@@ -17,7 +15,7 @@
 <?php if(isset($_SESSION["loggedin"]) && $_SESSION["type"] == 0) { ?>
     <a href="<?= BASE_URL . "users/add" ?>">Dodaj novega prodajalca</a>
 <?php } else if (isset($_SESSION["loggedin"]) && $_SESSION["type"] == 1) { ?>
-    <a href="<?= BASE_URL . "users/add" ?>">Dodaj novo stranko</a>
+    <a href="<?= BASE_URL . "users/add" ?>">Dodaj novo stranko</a>  |
     <a href="<?= BASE_URL . "articles" ?>">Seznam artiklov</a> 
 <?php } ?>
 ]</p>

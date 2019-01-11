@@ -42,7 +42,7 @@
     <p><button>Posodobi zapis uporabnika</button></p>
 </form>
 
-<form action="<?= BASE_URL . "users/delete/" . $id ?>" method="post">
+<!--<form action="<?//= BASE_URL . "users/delete/" . $id ?>" method="post">
     <label>Izbris uporabnika? <input type="checkbox" name="delete_confirmation" required /></label>
     <button type="submit" class="important">Izbriši uporabnika</button>
-</form>
+</form>-->

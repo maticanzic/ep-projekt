@@ -17,4 +17,6 @@
     <li>Opis: <i><?= $description ?></i></li>
 </ul>
 
+<?php if(isset($_SESSION["loggedin"]) && $_SESSION["type"] == 1) { ?>
 <p>[ <a href="<?= BASE_URL . "articles/edit/" . $id ?>">Urejanje artikla</a> ] </p>
+<?php } ?>

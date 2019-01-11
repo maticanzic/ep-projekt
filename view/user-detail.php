@@ -23,5 +23,5 @@
     <li>Aktiviran: <b><?= $activated ? "DA" : "NE" ?></b></li>
 </ul>
 
-<p>[ <a href="<?= BASE_URL . "users/edit/" . $id ?>">Urejanje uporabnika</a> |
-    <a href="<?= BASE_URL . "users" ?>">Nazaj na seznam uporabnikov</a> ]</p>
+<p>[ <a href="<?= BASE_URL . "users/edit/" . $id ?>">Urejanje uporabnika</a>
+    <!--<a href="<?//= BASE_URL . "users" ?>">Nazaj na seznam uporabnikov</a>--> ]</p>

@@ -19,16 +19,29 @@
     <p><label>Geslo: <input type="password" name="password" value="<?= password_hash($password, PASSWORD_DEFAULT) ?>" required /></label></p>
     <p><label>Tip uporabnika:
         <select name="type">
-            <option value="1">Prodajalec</option>
-            <option value="2">Stranka</option>
+            <?php if($_SESSION["type"] == 0) { ?>
+                <option value="1" choose selected>Prodajalec</option>
+            <?php } else if ($_SESSION["type"] == 1) { ?>
+                <option value="2" choose selected>Stranka</option>
+            <?php } ?>
         </select></label></p>
-    <p><label>Naslov: <input type="text" name="address" value="<?= $address ?>"  /></label></p>
-    <p><label>Telefon: <input type="text" name="phone" value="<?= $phone ?>" /></label></p>
+    <?php if($_SESSION["type"] == 1) { ?>
+        <p><label>Naslov: <input type="text" name="address" value="<?= $address ?>"  /></label></p>
+        <p><label>Poštna številka: 
+            <select name="zipcode_id" value="<?= $zipcode_id ?>">
+                <option value="1">1000 Ljubljana</option>
+                <option value="2">2000 Maribor</option>
+                <option value="3">3000 Celje</option>
+                <option value="4">4000 Kranj</option>
+                <option value="5">5000 Nova Gorica</option>
+            </select></label></p>
+        <p><label>Telefon: <input type="text" name="phone" value="<?= $phone ?>" /></label></p>
+    <?php } ?>
     <p><label>Aktiviran: <input type="checkbox" name="activated" <?php if(isset($activated) && $activated == 1){print " checked=\"checked\"";} ?> /></label></p>
     <p><button>Posodobi zapis artikla</button></p>
 </form>
 
-<form action="<?= BASE_URL . "users/delete/" . $id ?>" method="post">
+<!--<form action="<? //=BASE_URL . "users/delete/" . $id ?>" method="post">
     <label>Izbris uporabnika? <input type="checkbox" name="delete_confirmation" required /></label>
     <button type="submit" class="important">Izbriši uporabnika</button>
-</form>
+</form>-->
