@@ -55,23 +55,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Set parameters
             $param_email = $email;
             
-            $uporabnikEmail = $email;
-            
-            if ($emailCert == $email) {
-                //echo "$emailCert je avtoriziran uporabnik!";
+            $uporabnikEmail = $email;           
 
-                // Attempt to execute the prepared statement
-                if($stmt->execute()){
-                    // Store result
-                    $stmt->store_result();
+            // Attempt to execute the prepared statement
+            if($stmt->execute()){
+                // Store result
+                $stmt->store_result();
 
-                    // Check if username exists, if yes then verify password
-                    if($stmt->num_rows == 1){                    
-                        // Bind result variables
-                        $stmt->bind_result($id, $name, $lastName, $email, $hashed_password, $type, $address, $zipcode_id, $phone, $activated);
+                // Check if username exists, if yes then verify password
+                if($stmt->num_rows == 1) {                    
+                    // Bind result variables
+                    $stmt->bind_result($id, $name, $lastName, $email, $hashed_password, $type, $address, $zipcode_id, $phone, $activated);
 
-                        if($stmt->fetch()){
-                            if(password_verify($password, $hashed_password)) {
+                    if($stmt->fetch()){
+                        if(password_verify($password, $hashed_password)) {
+                            if ($type != 2 && $emailCert == $email) {
                                 if($activated == 1) {
                                     //session_regenerate_id();
 
@@ -88,14 +86,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     $_SESSION["activated"] = $activated;
 
                                     CtrlLogin::logged_in();
-                                }                         
-                            } else{
-                                // Display an error message if password is not valid
-                                if ($activated == 0) {
-                                    $password_err = "Prijava neaktiviranim uporabnikom ni mogoča.";
                                 } else {
+                                    $password_err = "Prijava neaktiviranim uporabnikom ni mogoča.";
+                                }
+                            } else if ($type == 2) {
+                                if($activated == 1) {
+                                    //session_regenerate_id();
+
+                                    // Store data in session variables
+                                    $_SESSION["loggedin"] = true;
+                                    $_SESSION["id"] = $id;                
+                                    $_SESSION["name"] = $name;
+                                    $_SESSION["lastName"] = $lastName;
+                                    $_SESSION["email"] = $email;   
+                                    $_SESSION["type"] = $type;
+                                    $_SESSION["address"] = $address;
+                                    $_SESSION["zipcode_id"] = $zipcode_id;                            
+                                    $_SESSION["phone"] = $phone;
+                                    $_SESSION["activated"] = $activated;
+
+                                    CtrlLogin::logged_in();
+                                } else {
+                                    // Display an error message if password is not valid                           
                                     $password_err = "Napačno geslo!";
                                 }
+                            } else {
+                                echo "$uporabnikEmail ni avtoriziran uporabnik!";                              
                             }
                         }
                     } else{
@@ -107,14 +123,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 }           
                 // Close statement
                 $stmt->close();
-            } else {
-                echo "$uporabnikEmail ni avtoriziran uporabnik!";
             }
-
-        }
-    }   
-    // Close connection
-    $mysqli->close();
+        }   
+        // Close connection
+        $mysqli->close();
+    }
 }
 ?>
  
