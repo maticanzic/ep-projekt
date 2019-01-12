@@ -36,9 +36,8 @@
         <input type="hidden" name="address" value="<?= $address ?>" />
         <input type="hidden" name="zipcode_id" value="<?= $zipcode_id ?>" />
         <input type="hidden" name="phone" value="<?= $phone ?>" />
-        <input type="hidden" name="activated" value="<?= $activated ?>" />
     <?php } ?>
-
+        <input type="hidden" name="activated" value="<?= $activated ?>" />
     <p><button>Posodobi zapis uporabnika</button></p>
 </form>
 

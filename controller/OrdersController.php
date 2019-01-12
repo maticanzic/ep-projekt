@@ -6,7 +6,13 @@
     require_once("ViewHelper.php");
 
     class OrdersController {
-
+        public static function orderSubmit() {
+            echo ViewHelper::render("view/order-submit.php");
+        }
+        public static function orderConfirmation() {
+            echo ViewHelper::render("view/order-confirmation.php");
+        }
+        
         public static function get($id) {
             echo ViewHelper::render("view/order-detail.php", OrderDB::get(["id" => $id]));
         }
@@ -17,22 +23,22 @@
             ]);
         }
 
-        public static function addForm($values = [
+        /*public static function addForm($values = [
             "id_user" => "",
             "id_seller" => "",
             "status" => 0
         ]) {
             echo ViewHelper::render("view/order-add.php", $values);
-        }
+        }*/
 
-        public static function add() {
-            $data = filter_input_array(INPUT_POST, self::getRules());
+        public static function add($values) {
+            $data = array_filter($values, "self::getRules");
 
             if (self::checkValues($data)) {
                 $id = OrderDB::insert($data);
-                echo ViewHelper::redirect(BASE_URL . "orders/" . $id);
+                return $id;
             } else {
-                self::addForm($data);
+                echo ViewHelper::redirect(BASE_URL . "orders/" . $id);
             }
         }
 

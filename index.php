@@ -23,6 +23,12 @@
     $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
     $urls = [
+        "/^orders\/submit$/" => function ($method) {
+            OrdersController::orderSubmit();
+        },
+        "/^orders\/confirmation$/" => function ($method) {
+            OrdersController::orderConfirmation();
+        },
         "/^orders$/" => function ($method) {
             OrdersController::index();
         },
