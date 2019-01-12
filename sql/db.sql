@@ -89,7 +89,7 @@ DROP TABLE IF EXISTS `bill`;
 CREATE TABLE `bill` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
-  `id_seller` int(11),   
+  `id_seller` int(11) NOT NULL,   
   `status` smallint NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_order_user` FOREIGN KEY(`id_user`) REFERENCES `user`(`id`),
@@ -104,9 +104,9 @@ CREATE TABLE `bill` (
 LOCK TABLES `bill` WRITE;
 /*!40000 ALTER TABLE `bill` DISABLE KEYS */;
 INSERT INTO `bill` VALUES 
-(1, 3, '', 0),
-(2, 3, '', 1),
-(3, 3, '', 2);
+(1, 3, 2, 0),
+(2, 3, 2, 1),
+(3, 3, 2, 2);
 /*!40000 ALTER TABLE `bill` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -121,10 +121,7 @@ CREATE TABLE `order_article` (
   `amount` int(11) NOT NULL,
   PRIMARY KEY (`id_article`, `id_order`),
   CONSTRAINT `FK_oa_order` FOREIGN KEY(`id_order`) REFERENCES `bill`(`id`) 
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FK_oa_article` FOREIGN KEY (`id_article`) REFERENCES `bill`(`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

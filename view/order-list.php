@@ -27,7 +27,12 @@
             if ($order["status"] == 1) { ?>
                 <li><a href="<?= BASE_URL . "orders/" . $order["id"] ?>"> 
                     Naročilo - ID <?= $order["id"] ?>
-                </a></li>
+                </a>
+                <form action="<?= BASE_URL . "orders/delete/" . $order["id"] ?>" method="post">
+                    <label>Izbris naročila? <input type="checkbox" name="delete_confirmation" required /></label>
+                    <button type="submit" class="important"> Prekliči naročilo</button>
+                </form>
+                </li>
             <?php } endforeach; ?>
         <h3>Potrjena naročila:</h3>
             <?php foreach ($orders as $order):

@@ -12,8 +12,8 @@
 
 <ul>
     <li>Naziv: <b><?= $title ?></b></li>
-    <li>Cena: <b><?= $price ?> EUR</b></li>
-    <li>Aktiviran: <b><?= $activated ? "DA" : "NE" ?></b></li>
+    <li>Cena: <b><?= $price ?> €</b></li>
+    <li>Status: <b><?= $activated ? "Artikel je na voljo." : "Artikel trenutno ni na voljo." ?></b></li>
     <li>Opis: <i><?= $description ?></i></li>
 </ul>
 

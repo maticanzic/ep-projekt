@@ -57,7 +57,11 @@
                             <?php } ?></b></li>
     </ul>
 
-    <?php if(isset($_SESSION["loggedin"]) && $_SESSION["type"] == 1) { ?>
-    <p>[ <a href="<?= BASE_URL . "orders/edit/" . $id ?>">Urejanje naročila</a> ] </p>
+    <?php if(isset($_SESSION["loggedin"]) && $_SESSION["type"] == 1) { 
+            if($status != 2) { ?>
+                <p>[ <a href="<?= BASE_URL . "orders/edit/" . $id ?>">Urejanje naročila</a> ] </p>
+            <?php } else { ?>
+                <p>Naročilo je bilo stornirano, zato sprememba statusa naročila ni mogoča.</p>
+            <?php } ?>
     <?php } ?>
 <?php } ?>
