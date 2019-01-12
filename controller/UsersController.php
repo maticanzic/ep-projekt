@@ -29,7 +29,7 @@
             "type" => 0,
             "address" => "",
             "phone" => "",
-            "zipcode_id" => "",
+            "zipcode_id" => 1,
             "activated" => 0
         ]) {
             echo ViewHelper::render("view/user-add.php", $values);
