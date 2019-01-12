@@ -13,9 +13,6 @@
     require_once("controller/OrderArticlesController.php");
 
     define("BASE_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php"));
-    //echo($_SERVER["SCRIPT_NAME"]);
-    //printf("\n");
-    //echo(rtrim($_SERVER["SCRIPT_NAME"]));
 
     define("IMAGES_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/images/");
     define("CSS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/css/");
@@ -152,27 +149,4 @@
     }
 
     ViewHelper::displayError(new InvalidArgumentException("No controller matched."), true);
-?>
-
-<?php
-/*    $authorized_users = ["Vanesa", "Matic"];
-
-    $client_cert = filter_input(INPUT_SERVER, "SSL_CLIENT_CERT");
-
-    if ($client_cert == null) {
-        die('err: Spremenljivka SSL_CLIENT_CERT ni nastavljena.');
-    }
-
-
-    $cert_data = openssl_x509_parse($client_cert);
-    $commonname = (is_array($cert_data['subject']['CN']) ?
-                    $cert_data['subject']['CN'][0] : $cert_data['subject']['CN']);
-    if (in_array($commonname, $authorized_users)) {
-        echo "$commonname je avtoriziran uporabnik, zato vidi trenutni čas: " . date("H:i");
-    } else {
-        echo "$commonname ni avtoriziran uporabnik in nima dostopa do ure";
-    }
-
-    echo "<p>Vsebina certifikata: ";
-    var_dump($cert_data);*/
 ?>

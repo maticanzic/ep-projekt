@@ -37,8 +37,8 @@
         <input type="hidden" name="zipcode_id" value="<?= $zipcode_id ?>" />
         <input type="hidden" name="phone" value="<?= $phone ?>" />
     <?php } ?>
-        <input type="hidden" name="activated" value="<?= $activated ?>" />
-    <p><button>Posodobi zapis uporabnika</button></p>
+    <input type="hidden" name="activated" <?php $activated ?> />
+    <p><button>Posodobi zapis</button></p>
 </form>
 
 <!--<form action="<?//= BASE_URL . "users/delete/" . $id ?>" method="post">
