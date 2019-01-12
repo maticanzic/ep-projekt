@@ -108,7 +108,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     CtrlLogin::logged_in();
                                 } else {
                                     // Display an error message if password is not valid                           
-                                    $password_err = "Napačno geslo!";
+                                    //$password_err = "Napačno geslo!";
+                                    echo "$uporabnikEmail ni avtoriziran uporabnik!"; 
                                 }
                             } else {
                                 echo "$uporabnikEmail ni avtoriziran uporabnik!";                              
