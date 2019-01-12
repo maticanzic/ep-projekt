@@ -17,8 +17,6 @@
     }
     $posta = PostController::get($uporabnik["zipcode_id"]);
     $order_articles = OrderArticlesController::getOrderArticlesById($id);
-    print_r($order_articles);
-    print_r($uporabnik);
 ?>
 
 
@@ -42,10 +40,14 @@
 <ul>
     <li>Artikli:</li>
     <ul>
-        <?php foreach ($order_articles as $order_article): 
-            $article = ArticlesController::get($order_article["article_id"]); ?>
-        <li><?= $order_article["amount"] ?> &times; <?= $article["title"] ?>, <?= $article["price"] ?> € ?></li>
+        <?php 
+        $total = 0;
+        foreach ($order_articles as $order_article):
+            $article = ArticlesController::getArticleDetails($order_article["id_article"]); 
+            $total += $order_article["amount"] * $article["price"]; ?>
+        <li><?= $order_article["amount"] ?> &times; <?= $article["title"] ?>, <b><?= $article["price"] ?> €</b></li>
         <?php endforeach;    ?>
+        <p>Skupaj: <b><?= number_format($total, 2) ?> €</p>
     </ul>   
     <li>Status naročila: <b>
             <?php if ($status == 0) { ?> POTRJENO 

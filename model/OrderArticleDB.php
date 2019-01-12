@@ -24,11 +24,7 @@ class OrderArticleDB extends AbstractDB {
                         . " FROM order_article"
                         . " WHERE id_order = :id_order", $id_order);
         
-        if (count($order_articles) == 1) {
-            return $order_articles[0];
-        } else {
-            throw new InvalidArgumentException("No such order_article");
-        }
+        return $order_articles;
     }
 
     public static function getAll() {

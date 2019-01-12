@@ -6,7 +6,10 @@
     require_once("ViewHelper.php");
 
     class ArticlesController {
-
+        public static function getArticleDetails($id) {
+            return ArticleDB::get(["id" => $id]);
+        }
+        
         public static function get($id) {
             echo ViewHelper::render("view/article-detail.php", ArticleDB::get(["id" => $id]));
         }
