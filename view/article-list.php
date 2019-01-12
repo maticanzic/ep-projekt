@@ -93,7 +93,11 @@ switch ($data["do"]) {
                         <b><p><?= number_format($article["price"], 2) ?> €<br/></b>
                         <a href="<?= BASE_URL . "articles/" . $article["id"] ?>" class="btn btn-info details">Podrobnosti</a>
                         <?php if(isset($_SESSION["loggedin"]) && $_SESSION["type"] == 2) { ?>
-                            <button type="submit" class="btn btn-info add-to-cart">V košarico</button>
+                            <?php if($article["activated"] == 1) { ?>
+                                <button type="submit" class="btn btn-info add-to-cart">V košarico</button>
+                            <?php } else { ?>
+                                <p>Trenutno ni na voljo</p>
+                            <?php } ?>
                         <?php } ?>
                     </form>
                 </div>
