@@ -55,6 +55,7 @@ switch ($data["do"]) {
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
         <link rel ="stylesheet" type="text/css" href="<?= CSS_URL . "bootstrap.min.css" ?>">
         <link rel="stylesheet" type="text/css" href="<?= CSS_URL . "style.css" ?>">
         <meta charset="UTF-8" />
@@ -91,10 +92,10 @@ switch ($data["do"]) {
                         <input type="hidden" name="id" value="<?= $article["id"] ?>" />
                         <p><?= $article["title"] ?></p>
                         <b><p><?= number_format($article["price"], 2) ?> €<br/></b>
-                        <a href="<?= BASE_URL . "articles/" . $article["id"] ?>" class="btn btn-info details">Podrobnosti</a>
+                        <a href="<?= BASE_URL . "articles/" . $article["id"] ?>" class="btn btn-info details"><i class="fas fa-info-circle"></i> Podrobnosti</a>
                         <?php if(isset($_SESSION["loggedin"]) && $_SESSION["type"] == 2) { ?>
                             <?php if($article["activated"] == 1) { ?>
-                                <button type="submit" class="btn btn-info add-to-cart">V košarico</button>
+                                <button type="submit" class="btn btn-info add-to-cart"><i class="fas fa-cart-plus"></i> V košarico</button>
                             <?php } else { ?>
                                 <p>Trenutno ni na voljo</p>
                             <?php } ?>
@@ -126,18 +127,20 @@ switch ($data["do"]) {
                                     $article["title"] :
                                     substr($article["title"], 0, 26) . " ..."
                             ?> (<?= number_format($article["price"], 2) ?> €)
-                            <button class="update-cart" type="submit">Posodobi</button> 
+                            <button class="update-cart" type="submit"><i class="fas fa-sync-alt"></i> Posodobi</button> 
                         </form>
                     <?php endforeach; ?>
 
                     <p>Skupaj: <b><?= number_format($znesek, 2) ?> EUR</b></p>
 
+                    <form action="<?= BASE_URL . "orders/confirmation" ?>" method="POST">
+                          <button type="submit" class="btn btn-success gumb"><i class="fas fa-receipt"></i></i> Pripravi naročilo</button>
+                    </form>
                     <form action="<?= BASE_URL . "articles" ?>" method="POST">
                         <input type="hidden" name="do" value="purge_cart" />
-                        <input type="submit" value="Izprazni košarico" />
+                        <button type="submit" class="btn btn-danger gumb"><i class="fas fa-trash-alt"></i> Izprazni košarico</button>
                     </form>
 
-                    <!-- TO-DO: DODAJ GUMB ZA POTRDITEV NAROČILA -->
                 <?php } elseif(!isset($_SESSION["loggedin"])) { ?>
                     Za dodajanje v košarico se je potrebno prijaviti.
                 <?php } else { ?>

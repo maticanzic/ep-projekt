@@ -10,13 +10,13 @@
             return OrderArticleDB::get(["id_order" => $id]);
         }
         
-        public static function get($id) {
+        /*public static function get($id) {
             echo ViewHelper::render("view/order-detail.php", OrderDB::get(["id" => $id]));
         }
 
         public static function index() {
             echo ViewHelper::render("view/order-list.php", [
-                "orders" => OrderDB::getAll()
+                "orders" => OrderArticleDB::getAll()
             ]);
         }
 
@@ -26,16 +26,15 @@
             "status" => 0
         ]) {
             echo ViewHelper::render("view/order-add.php", $values);
-        }
+        }*/
 
-        public static function add() {
-            $data = filter_input_array(INPUT_POST, self::getRules());
+        public static function add($values) {
+            $data = array_filter($values, "self::getRules");
 
             if (self::checkValues($data)) {
-                $id = OrderDB::insert($data);
-                echo ViewHelper::redirect(BASE_URL . "orders/" . $id);
+                $id = OrderArticleDB::insert($data);
             } else {
-                self::addForm($data);
+                echo ViewHelper::redirect(BASE_URL . "articles");
             }
         }
 
@@ -46,7 +45,7 @@
             ]);
 
             if (self::checkValues($data)) {
-                OrderDB::delete(["id" => $id]);
+                OrderArticlesDB::delete(["id" => $id]);
                 $url = BASE_URL . "orders";
             } else {
                 $url = BASE_URL . "orders/edit/" . $id;
