@@ -4,7 +4,11 @@ require_once("model/UserDB.php");
 require_once("ViewHelper.php");
 
 class UsersController {
-
+    public static function getUserDetails($id) {
+        $userDetails = UserDB::get($id);
+        return $userDetails;
+    }
+    
     public static function get($id) {
         echo ViewHelper::render("view/user-detail.php", UserDB::get(["id" => $id]));
     }

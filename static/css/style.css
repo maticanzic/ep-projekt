@@ -3,6 +3,10 @@
     width: 70%;
 }
 
+br {
+    line-height: 3;
+}
+
 html {
     margin-left: 4px;
     margin-top: 4px;
