@@ -89,7 +89,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 } else {
                                     $password_err = "Prijava neaktiviranim uporabnikom ni mogoča.";
                                 }
-                            } else if (empty($client_cert) && $type == 2) {
+                            } else if ($type == 2) {
                                 if($activated == 1) {
                                     //session_regenerate_id();
 

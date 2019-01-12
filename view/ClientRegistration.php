@@ -130,7 +130,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($stmt->execute()){
                 // Redirect to login page
                 //header("location: Login.php");
-                CtrlRegistration::login();
+                if ($_POST["g-recaptcha-response"] == '') {
+                    echo "Nekaj je šlo narobe, poskusite znova.";
+                } else {
+                    CtrlRegistration::login();
+                }              
             } else{
                 echo "Nekaj je šlo narobe, poskusite znova.";
             }
@@ -153,6 +157,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         body{ font: 14px sans-serif; }
         .wrapper{ width: 350px; padding: 20px; }
     </style>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
     <div class="wrapper">
@@ -198,7 +203,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <label>Telefonska številka</label>
                 <input type="text" name="phone" class="form-control" value="<?= $phone ?>">
                 <span class="help-block"><?php echo $phone_err; ?></span>
-            </div>  
+            </div> 
+            <div class="g-recaptcha" data-sitekey="6LfIOYkUAAAAAJBdVnr6fiQWYguSPm92R7e1Dku-"></div>        
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Registriraj se">
             </div>
