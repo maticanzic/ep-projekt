@@ -23,6 +23,6 @@
     <li>Aktiviran: <b><?= $activated ? "DA" : "NE" ?></b></li>
 </ul>
 <?php if($type > $_SESSION["type"]) { ?>
-    <p>[ <a href="<?= BASE_URL . "users/edit/" . $id ?>">Urejanje uporabnika</a>
+    <p>[ <a href="<?= BASE_URL . "users/edit/" . $id ?>">Urejanje uporabnika</a>]</p>
 <?php } ?>
-    <!--<a href="<?//= BASE_URL . "users" ?>">Nazaj na seznam uporabnikov</a> ]</p>-->
+    <!--<a href="<?//= BASE_URL . "users" ?>">Nazaj na seznam uporabnikov</a>--> 

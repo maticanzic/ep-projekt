@@ -89,7 +89,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 } else {
                                     $password_err = "Prijava neaktiviranim uporabnikom ni mogoča.";
                                 }
-                            } else if ($type == 2) {
+                            } else if (empty($client_cert) && $type == 2) {
                                 if($activated == 1) {
                                     //session_regenerate_id();
 
@@ -108,7 +108,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     CtrlLogin::logged_in();
                                 } else {
                                     // Display an error message if password is not valid                           
-                                    $password_err = "Napačno geslo!";
+                                    //$password_err = "Napačno geslo!";
+                                    echo "$uporabnikEmail ni avtoriziran uporabnik!"; 
                                 }
                             } else {
                                 echo "$uporabnikEmail ni avtoriziran uporabnik!";                              
