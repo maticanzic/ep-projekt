@@ -1,3 +1,4 @@
+
 RewriteEngine On
 RewriteBase /netbeans/ep-projekt/
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -9,6 +10,7 @@ RewriteRule ^(.*) index.php/$1 [L,PT,QSA]
 #RewriteRule "(registration)" "https://%{HTTP_HOST}%{REQUEST_URI}"
 
 #RewriteRule "(login)" "https://%{HTTP_HOST}%{REQUEST_URI}"
-    #SSLVerifyClient require
-    #SSLVerifyDepth 1
-    #SSLOptions +ExportCertData
+#SSLVerifyClient require
+#SSLVerifyDepth 1
+#SSLOptions +ExportCertData
+
