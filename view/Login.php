@@ -1,19 +1,11 @@
 <?php
-// Initialize the session
-//session_start();
- 
-// Check if the user is already logged in, if yes then redirect him to welcome page
-/*if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: welcome.php");
-    exit;
-}*/
  
 // Include config file
 require_once "model/DB.php";
  
 // Define variables and initialize with empty values
 $email = $password = "";
-$email_err = $password_err = "";
+$email_err = $password_err = $activated_err = "";
 
 /* Attempt to connect to MySQL database */
 $mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -62,26 +54,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 if($stmt->num_rows == 1){                    
                     // Bind result variables
                     $stmt->bind_result($id, $name, $lastName, $email, $hashed_password, $type, $address, $zipcode_id, $phone, $activated);
+                    
                     if($stmt->fetch()){
-                        if(password_verify($password, $hashed_password)){
-                            //session_regenerate_id();
-                            
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;                
-                            $_SESSION["name"] = $name;
-                            $_SESSION["lastName"] = $lastName;
-                            $_SESSION["email"] = $email;   
-                            $_SESSION["type"] = $type;
-                            $_SESSION["address"] = $address;
-                            $_SESSION["zipcode_id"] = $zipcode_id;                            
-                            $_SESSION["phone"] = $phone;
-                            $_SESSION["activated"] = $activated;
-                            
-                            CtrlLogin::logged_in();
+                        if(password_verify($password, $hashed_password)) {
+                            if($activated == 1) {
+                                //session_regenerate_id();
+                                
+                                // Store data in session variables
+                                $_SESSION["loggedin"] = true;
+                                $_SESSION["id"] = $id;                
+                                $_SESSION["name"] = $name;
+                                $_SESSION["lastName"] = $lastName;
+                                $_SESSION["email"] = $email;   
+                                $_SESSION["type"] = $type;
+                                $_SESSION["address"] = $address;
+                                $_SESSION["zipcode_id"] = $zipcode_id;                            
+                                $_SESSION["phone"] = $phone;
+                                $_SESSION["activated"] = $activated;
+
+                                CtrlLogin::logged_in();
+                            }                         
                         } else{
                             // Display an error message if password is not valid
-                            $password_err = "Napačno geslo!";
+                            if ($activated == 0) {
+                                $password_err = "Prijava neaktiviranim uporabnikom ni mogoča.";
+                            } else {
+                                $password_err = "Napačno geslo!";
+                            }
                         }
                     }
                 } else{
