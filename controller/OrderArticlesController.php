@@ -2,11 +2,14 @@
     header('X-Frame-Options: SAMEORIGIN');
     header('X-Content-Type-Options: nosniff');
     header("X-XSS-Protection: 1; mode=block");
-    require_once("model/OrderDB.php");
+    require_once("model/OrderArticleDB.php");
     require_once("ViewHelper.php");
 
-    class OrdersController {
-
+    class OrderArticlesController {
+        public static function getOrderArticlesById($id) {
+            return OrderArticleDB::get(["id_order" => $id]);
+        }
+        
         public static function get($id) {
             echo ViewHelper::render("view/order-detail.php", OrderDB::get(["id" => $id]));
         }
@@ -36,29 +39,6 @@
             }
         }
 
-        public static function editForm($params) {
-            if (is_array($params)) {
-                $values = $params;
-            } else if (is_numeric($params)) {
-                $values = OrderDB::get(["id" => $params]);
-            } else {
-                throw new InvalidArgumentException("Cannot show form.");
-            }
-
-            echo ViewHelper::render("view/order-edit.php", $values);
-        }
-
-        public static function edit($id) {
-            $data = filter_input_array(INPUT_POST, self::getRules());
-
-            if (self::checkValues($data)) {
-                $data["id"] = $id;
-                OrderDB::update($data);
-                ViewHelper::redirect(BASE_URL . "orders/" . $data["id"]);
-            } else {
-                self::editForm($data);
-            }
-        }
 
         public static function delete($id) {
             $data = filter_input_array(INPUT_POST, [
@@ -99,9 +79,9 @@
          */
         public static function getRules() {
             return [
-                'id_user' => FILTER_SANITIZE_NUMBER_INT,
-                'id_seller' => FILTER_SANITIZE_NUMBER_INT,
-                'status' => FILTER_SANITIZE_NUMBER_INT
+                'id_order' => FILTER_SANITIZE_NUMBER_INT,
+                'id_article' => FILTER_SANITIZE_NUMBER_INT,
+                'amount' => FILTER_SANITIZE_NUMBER_INT
             ];
         }
     }

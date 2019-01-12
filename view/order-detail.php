@@ -11,10 +11,14 @@
     ]</p>
 
 <?php
-    $uporabnik = UsersController::getUserDetails(array("id" => $id_user));
+    $uporabnik = UsersController::getUserDetails($id_user);
     if ($id_seller != 0) {
-        $prodajalec = UsersController::getUserDetails(array("id" => $id_seller));
+        $prodajalec = UsersController::getUserDetails($id_seller);
     }
+    $posta = PostController::get($uporabnik["zipcode_id"]);
+    $order_articles = OrderArticlesController::getOrderArticlesById($id);
+    print_r($order_articles);
+    print_r($uporabnik);
 ?>
 
 
@@ -22,12 +26,27 @@
 <ul>
     <li>Ime in priimek: <b><?= $uporabnik["name"] ?> <?= $uporabnik["lastName"] ?></b></li>
     <li>Naslov: <b><?= $uporabnik["address"] ?></b></li>
-    <li>Pošta: <b><?= $posta[""]</b></li>
+    <li>Pošta: <b><?= $posta["zipcode"] ?></b></li>
+    <li>Telefon: <b><?= $uporabnik["phone"]?> </b></li>
 </ul>
+
+<?php if(isset($prodajalec)) { ?>
+<h4>Podatki o prodajalcu</h4>
+<ul>
+    <li>Ime in priimek prodajalca: <b><?= $prodajalec["name"] ?> <?= $prodajalec["lastName"] ?></li>
+</ul>
+<?php } ?>
 
 <br>
 <h4>Podatki o naročilu</h4>
-<ul>    
+<ul>
+    <li>Artikli:</li>
+    <ul>
+        <?php foreach ($order_articles as $order_article): 
+            $article = ArticlesController::get($order_article["article_id"]); ?>
+        <li><?= $order_article["amount"] ?> &times; <?= $article["title"] ?>, <?= $article["price"] ?> € ?></li>
+        <?php endforeach;    ?>
+    </ul>   
     <li>Status naročila: <b>
             <?php if ($status == 0) { ?> POTRJENO 
                 <?php } else if ($status == 1) { ?> ODDANO 

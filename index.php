@@ -9,6 +9,8 @@
     require_once("controller/CtrlLogin.php");
     require_once("controller/CtrlLogout.php");
     require_once("controller/OrdersController.php");
+    require_once("controller/PostController.php");
+    require_once("controller/OrderArticlesController.php");
 
     define("BASE_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php"));
     //echo($_SERVER["SCRIPT_NAME"]);

@@ -4,10 +4,28 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/ep/NetBeansProjects/ep-projekt/view/Login.php</file>
-            <file>file:/home/ep/NetBeansProjects/ep-projekt/view/user-list.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/model/UserDB.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/controller/PostController.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/view/user-add.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/controller/OrdersController.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/view/article-detail.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/ViewHelper.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/view/user-detail.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/view/article-add.php</file>
             <file>file:/home/ep/NetBeansProjects/ep-projekt/view/article-list.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/view/user-edit.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/model/PostDB.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/view/profile-edit.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/model/AbstractDB.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/view/order-list.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/view/user-list.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/index.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/controller/UsersController.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/view/article-edit.php</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/view/order-detail.php</file>
             <file>file:/home/ep/NetBeansProjects/ep-projekt/view/ClientRegistration.php</file>
             <file>file:/home/ep/NetBeansProjects/ep-projekt/sql/db.sql</file>
+            <file>file:/home/ep/NetBeansProjects/ep-projekt/model/OrderDB.php</file>
         </group>
     </open-files>
 </project-private>

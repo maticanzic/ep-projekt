@@ -8,7 +8,7 @@
     class PostController {
 
         public static function get($id) {
-            echo PostDB::get(["id" => $id]);
+            return PostDB::get(["id" => $id]);
         }
     }
 ?>

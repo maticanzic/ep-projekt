@@ -116,8 +116,8 @@ DROP TABLE IF EXISTS `order_article`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order_article` (
-  `id_article` int(11) NOT NULL,
   `id_order` int(11) NOT NULL,
+  `id_article` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
   PRIMARY KEY (`id_article`, `id_order`),
   CONSTRAINT `FK_oa_order` FOREIGN KEY(`id_order`) REFERENCES `bill`(`id`) 
@@ -127,6 +127,27 @@ CREATE TABLE `order_article` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_article`
+--
+
+LOCK TABLES `order_article` WRITE;
+/*!40000 ALTER TABLE `order_article` DISABLE KEYS */;
+INSERT INTO `order_article` VALUES 
+(1, 1, 10),
+(1, 2, 5),
+(1, 3, 3),
+(2, 1, 4),
+(2, 2, 2),
+(3, 1, 1),
+(3, 3, 1);
+/*!40000 ALTER TABLE `order_article` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+
 
 DROP TABLE IF EXISTS `post_office`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

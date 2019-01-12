@@ -7,7 +7,7 @@
 
     class UsersController {
         public static function getUserDetails($id) {
-            $userDetails = UserDB::get($id);
+            $userDetails = UserDB::get(["id" => $id]);
             return $userDetails;
         }
 
