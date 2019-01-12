@@ -14,7 +14,7 @@
 <form action="<?= BASE_URL . "articles/edit/" . $id ?>" method="post">
     <input type="hidden" name="id" value="<?= $id ?>"  />
     <p><label>Naziv: <input type="text" name="title" value="<?= $title ?>" autofocus required /></label></p>
-    <p><label>Cena: <input type="number" name="price" value="<?= $price ?>" required /></label></p>
+    <p><label>Cena: <input type="number" name="price" step="0.01" min="0" value="<?= $price ?>" required /></label></p>
     <p><label>Aktiviran: <input type="checkbox" name="activated" <?php if(isset($activated) && $activated == 1){print " checked=\"checked\"";} ?> /></label></p>
     <p><label>Opis: <br/><textarea name="description" cols="70" rows="10" required ><?= $description ?></textarea></label></p>
     <p><button>Posodobi zapis artikla</button></p>
