@@ -67,7 +67,8 @@ switch ($data["do"]) {
         <p>[       
         <?php if(!isset($_SESSION["loggedin"])) { ?>
             <a href="<?= BASE_URL . "registration" ?>">Registracija</a> |
-            <a href="<?= BASE_URL . "login" ?>">Prijava</a> 
+            <a href="<?= BASE_URL . "login" ?>">Prijava za stranke</a> |
+            <a href="<?= BASE_URL . "certificate" ?>">Prijava s certifikatom</a>
         <?php } else { 
             if($_SESSION["type"] == 1) { ?>
                 <a href="<?= BASE_URL . "articles/add" ?>">Dodaj nov artikel</a> |

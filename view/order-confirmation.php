@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <link rel ="stylesheet" type="text/css" href="<?= CSS_URL . "bootstrap.min.css" ?>">
 <link rel="stylesheet" type="text/css" href="<?= CSS_URL . "style.css" ?>">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <meta charset="UTF-8" />
 <title>Potrditev naročila</title>
 
@@ -42,6 +43,6 @@
 </ul>
 <br>
 <form action="<?= BASE_URL . "orders/submit" ?>" method="POST">
-      <input type="submit" value="Oddaj naročilo">
+    <button type="submit" class="btn btn-primary"><i class="fa fa-envelope"></i> Oddaj naročilo</button>
 </form>
 

@@ -20,6 +20,9 @@
     $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
     $urls = [
+        "/^certificate$/" => function ($method) {
+            CtrlLogin::certificateAuth();
+        },
         "/^orders\/edit\/(\d+)$/" => function ($method, $id) {
             if ($method == "POST") {
                 OrdersController::edit($id);

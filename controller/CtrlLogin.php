@@ -6,7 +6,10 @@
     require_once 'model/ArticleDB.php';
 
         class CtrlLogin {
-
+            public static function certificateAuth() {
+                echo ViewHelper::render("view/certificate.php");
+            }
+            
             public static function index() {
                 echo ViewHelper::render("view/Login.php");
             }
