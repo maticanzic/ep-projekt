@@ -100,7 +100,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($lastName_err) && empty($email_err) && empty($password_err) && empty($address_err) && empty($zipcode_id_err) && empty($phone_err)){
+    if($_POST["g-recaptcha-response"] != "" && empty($name_err) && empty($lastName_err) && empty($email_err) && empty($password_err) && empty($address_err) && empty($zipcode_id_err) && empty($phone_err)){
         
         // Prepare an insert statement
         $sql = "INSERT INTO user (name, lastName, email, password, type, address, zipcode_id, phone, activated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -130,11 +130,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($stmt->execute()){
                 // Redirect to login page
                 //header("location: Login.php");
-                if ($_POST["g-recaptcha-response"] == '') {
-                    echo "Nekaj je šlo narobe, poskusite znova.";
-                } else {
+                //if ($_POST["g-recaptcha-response"] == '') {
+                //    header("location: ClientRegistration.php");
+                //} else {
                     CtrlRegistration::login();
-                }              
+                //}              
             } else{
                 echo "Nekaj je šlo narobe, poskusite znova.";
             }
