@@ -1,10 +1,10 @@
 <?php
-// Include config file
+
 require_once "model/DB.php";
- 
-// Define variables and initialize with empty values
+
 $name = $lastName = $email = $password = $address = $zipcode_id = $phone = "";
 $name_err = $lastName_err = $email_err = $password_err = $address_err = $zipcode_id_err = $phone_err = "";
+
 /* Attempt to connect to MySQL database */
 $mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
  
@@ -13,7 +13,7 @@ if($mysqli === false){
     die("ERROR: Could not connect. " . $mysqli->connect_error);
 }
 
-// Processing form data when form is submitted
+// Processing form data when submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate name
     if(empty(trim($_POST["name"]))){
@@ -115,9 +115,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_lastName = $lastName;
             $param_email = $email;
  
-            // Generate a password with a known salt.
-            // password_hash($password, PASSWORD_BCRYPT, array("salt" => $salt));
-            // $salt = '$2y$10$' . mcrypt_create_iv(22);
+            // Generate a salted password            
             $salted_password = password_hash($password, PASSWORD_DEFAULT);
             
             $param_type = 2;
@@ -129,12 +127,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if($stmt->execute()){
                 // Redirect to login page
-                //header("location: Login.php");
-                //if ($_POST["g-recaptcha-response"] == '') {
-                //    header("location: ClientRegistration.php");
-                //} else {
-                    CtrlRegistration::login();
-                //}              
+                CtrlRegistration::login();        
             } else{
                 echo "Nekaj je šlo narobe, poskusite znova.";
             }

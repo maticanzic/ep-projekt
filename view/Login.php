@@ -1,9 +1,7 @@
 <?php
  
-// Include config file
 require_once "model/DB.php";
 
-// Define variables and initialize with empty values
 $email = $password = "";
 $email_err = $password_err = $activated_err = "";
 
@@ -15,7 +13,7 @@ if($mysqli === false){
     die("ERROR: Could not connect. " . $mysqli->connect_error);
 }
  
-// Processing form data when form is submitted
+// Processing form data when submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Check if email is empty
@@ -49,7 +47,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         
         if($stmt = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            //mysqli_stmt_bind_param($stmt, "s", $param_email);
             $stmt->bind_param("s", $param_email);
             
             // Set parameters
@@ -62,7 +59,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Store result
                 $stmt->store_result();
 
-                // Check if username exists, if yes then verify password
+                // Check if email exists, if yes then verify password
                 if($stmt->num_rows == 1) {                    
                     // Bind result variables
                     $stmt->bind_result($id, $name, $lastName, $email, $hashed_password, $type, $address, $zipcode_id, $phone, $activated);
