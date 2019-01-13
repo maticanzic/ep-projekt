@@ -20,6 +20,16 @@
     $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
     $urls = [
+        "/^orders\/edit\/(\d+)$/" => function ($method, $id) {
+            if ($method == "POST") {
+                OrdersController::edit($id);
+            } else {
+                OrdersController::editForm($id);
+            }
+        },
+        "/^orders\/delete\/(\d+)$/" => function ($method, $id) {
+            OrdersController::delete($id);
+        },
         "/^orders\/submit$/" => function ($method) {
             OrdersController::orderSubmit();
         },
