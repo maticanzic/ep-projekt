@@ -34,16 +34,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Validate credentials
     if(empty($email_err) && empty($password_err)){
-        $client_cert = filter_input(INPUT_SERVER, "SSL_CLIENT_CERT");
+        //$client_cert = filter_input(INPUT_SERVER, "SSL_CLIENT_CERT");
 
-        if ($client_cert == null) {
+        /*if ($client_cert == null) {
             die('err: Spremenljivka SSL_CLIENT_CERT ni nastavljena.');
-        }
+        }*/
 
-        $cert_data = openssl_x509_parse($client_cert);
+        /*$cert_data = openssl_x509_parse($client_cert);
         $emailCert = (is_array($cert_data['subject']['emailAddress']) ?
                         $cert_data['subject']['emailAddress'][0] : $cert_data['subject']['emailAddress']);
-        
+        */
         // Prepare a select statement
         $sql = "SELECT id, name, lastName, email, password, type, address, zipcode_id, phone, activated FROM user WHERE email = ?";
         
@@ -69,7 +69,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                     if($stmt->fetch()){
                         if(password_verify($password, $hashed_password)) {
-                            if ($type != 2 && $emailCert == $email) {
+                            //if ($type != 2 && $emailCert == $email) {
                                 if($activated == 1) {
                                     //session_regenerate_id();
 
@@ -89,7 +89,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 } else {
                                     $password_err = "Prijava neaktiviranim uporabnikom ni mogoča.";
                                 }
-                            } else if ($type == 2) {
+                            /*} else if ($type == 2) {
                                 if($activated == 1) {
                                     //session_regenerate_id();
 
@@ -113,7 +113,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 }
                             } else {
                                 echo "$uporabnikEmail ni avtoriziran uporabnik!";                              
-                            }
+                            }*/
                         }
                     } else{
                         // Display an error message if email doesn't exist
