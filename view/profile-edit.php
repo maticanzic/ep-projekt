@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <link rel ="stylesheet" type="text/css" href="<?= CSS_URL . "bootstrap.min.css" ?>">
 <link rel="stylesheet" type="text/css" href="<?= CSS_URL . "style.css" ?>">
 <meta charset="UTF-8" />
@@ -36,10 +37,10 @@
         <input type="hidden" name="address" value="<?= $address ?>" />
         <input type="hidden" name="zipcode_id" value="<?= $zipcode_id ?>" />
         <input type="hidden" name="phone" value="<?= $phone ?>" />
-        <input type="hidden" name="activated" <?php $activated ?> />
+        <input type="hidden" name="activated" value="<?= $activated ?>" />
     <?php } ?>
-    <input type="hidden" name="activated" <?php $activated ?> />
-    <p><button>Posodobi zapis</button></p>
+        <input type="hidden" name="activated" value="<?= $activated ?>"/>
+    <p><button><i class="fa fa-sync-alt"></i> Posodobi zapis</button></p>
 </form>
 
 <!--<form action="<?//= BASE_URL . "users/delete/" . $id ?>" method="post">

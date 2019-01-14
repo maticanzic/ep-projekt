@@ -1,4 +1,4 @@
-<?php if($_SESSION["type"] != 0) { ?>
+<?php if($_SESSION["type"] != 0 && !(($_SESSION["type"] == 2 && $_SESSION["id"] != $id_user))) { ?>
     <!DOCTYPE html>
     <link rel ="stylesheet" type="text/css" href="<?= CSS_URL . "bootstrap.min.css" ?>">
     <link rel="stylesheet" type="text/css" href="<?= CSS_URL . "style.css" ?>">
@@ -19,7 +19,7 @@
         $posta = PostController::get($uporabnik["zipcode_id"]);
         $order_articles = OrderArticlesController::getOrderArticlesById($id);
     ?>
-
+    
 
     <h4>Podatki o stranki</h4>
     <ul>

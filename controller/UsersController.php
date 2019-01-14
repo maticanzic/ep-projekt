@@ -74,7 +74,7 @@
                 $data["password"] = password_hash($data["password"], PASSWORD_DEFAULT);
             }
 
-            if (!isset($data["activated"]) || $data["activated"] === "" || $data["activated"] == null) {
+            if (!isset($data["activated"]) || $data["activated"] === "" || $data["activated"] == null || $data["activated"] == false) {
                 $data["activated"] = 0;
             }
 
