@@ -70,7 +70,7 @@
         public static function edit($id) {
             $data = filter_input_array(INPUT_POST, self::getRules());
 
-            if (isset($data["password"])) {
+            if (isset($data["password"]) && strlen($data["password"]) < 25) {
                 $data["password"] = password_hash($data["password"], PASSWORD_DEFAULT);
             }
 

@@ -70,6 +70,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $password_err = "Prosimo vnesite geslo.";     
     } elseif(strlen(trim($_POST["password"])) < 4){
         $password_err = "Geslo mora vsebovati vsaj 4 znake.";
+    } elseif(strlen(trim($_POST["password"])) > 25) {
+        $password_err = "Geslo mora biti krajše od 25 znakov.";
     } else{
         $password = trim($_POST["password"]);
     }
